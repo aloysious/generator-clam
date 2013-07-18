@@ -8,6 +8,6 @@
     },
 	"repository": {
         "type": "git",
-        "url": ""
+        "url": "http://gitlab.alibaba-inc.com/<%= groupName %>/<%= packageName %>"
     }
 }

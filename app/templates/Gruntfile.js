@@ -1,6 +1,7 @@
 var path = require('path'),
 	fs = require('fs'),
-	os = require('os');
+	os = require('os'),
+	exec = require('child_process').exec;
 
 module.exports = function (grunt) {
 
@@ -213,8 +214,20 @@ module.exports = function (grunt) {
 			publish: {
 				command: 'git push origin publish/<%= currentBranch %>:publish/<%= currentBranch %>'
 			},
-			grunt: {
+			commit:{
+			   command: 'git commit -m "<%= currentBranch %> - <%= grunt.template.today("yyyy-mm-dd hh:MM:ss") %>"'
+			},
+			add: {
+				command: 'git add .'	
+			},
+			prepub: {
+				command: 'git push origin daily/<%= currentBranch %>:daily/<%= currentBranch %>'
+			},
+			grunt_publish: {
 				command: 'grunt default:publish'
+			},
+			grunt_prepub:{
+				command: 'grunt default:prepub'
 			}
 		},
 
@@ -259,13 +272,47 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-yuidoc');
 
 	/**
-	 * 发布
+	 * 正式发布
 	 */
 	grunt.registerTask('publish', 'clam publish...', function() {
-
-		task.run('exec:grunt');
-		
+		task.run('exec:grunt_publish');
 	});
+
+	/**
+	 * 预发布
+	 */
+	grunt.registerTask('prepub', 'clam pre publish...', function() {
+		task.run('exec:grunt_prepub');
+	});
+
+	/**
+	 * 启动服务
+	 */
+	grunt.registerTask('on', 'clam server...', function() {
+		initClamServer();
+	});
+	grunt.registerTask('server', 'clam server...', function() {
+		initClamServer();
+	});
+
+	/*
+	 * 获取当前库的信息
+	 **/
+	grunt.registerTask('info', 'clam info...', function() {
+		var abcJSON = {};
+		try {
+			abcJSON = require(path.resolve(process.cwd(), 'abc.json'));
+			console.log('\n'+abcJSON.repository.url);
+		} catch (e){
+			console.log('未找到abc.json');
+		}
+	});
+
+	// 启动clam server
+	function initClamServer(){
+		console.log('sdfsdf');
+		exec('node -v');
+	}
 
 	// 遍历当前目录的文件
 	function walk(uri, files) {
@@ -314,10 +361,8 @@ module.exports = function (grunt) {
 
     // 打包
 	return grunt.registerTask('default', 'clam running ...', function(type) {
-	
-		var done = this.async();
 
-		var exec = require('child_process').exec;
+		var done = this.async();
 
 		// 获取当前分支
 		exec('git branch', function(err, stdout, stderr, cb) {
@@ -342,6 +387,8 @@ module.exports = function (grunt) {
 			task.run(['clean:build', 'ktpl', 'copy', 'kmc', 'uglify', 'css_combo' ,'less', 'cssmin','yuidoc'/*, 'copy', 'clean:mobile'*/]);
 		} else if ('publish' === type) {
 			task.run(['exec:tag', 'exec:publish']);
+		} else if ('prepub' === type) {
+			task.run(['exec:add','exec:commit','exec:prepub']);
 		}
 
 	});

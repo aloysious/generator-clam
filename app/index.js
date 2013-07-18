@@ -82,6 +82,12 @@ ClamGenerator.prototype.askFor = function askFor() {
             message: 'Author Email:',
             default: abcJSON.author.email,
             warning: ''
+        },
+        {
+            name: 'groupName',
+            message: 'Group Name(可留空):',
+            default: '',
+            warning: ''
         }
 	];
 
@@ -94,6 +100,7 @@ ClamGenerator.prototype.askFor = function askFor() {
 		this.projectName = parseMojoName(this.packageName); //ProjectName
         this.author = props.author;
         this.email = props.email;
+        this.groupName = props.groupName;
 
         cb();
     }.bind(this));
