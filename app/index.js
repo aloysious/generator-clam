@@ -4,12 +4,10 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var ABC = require('abc-generator');
 
-module.exports = ClamGenerator;
-
 var ClamGenerator = module.exports = function ClamGenerator(args, options, config) {
-  // yeoman.generators.Base.apply(this, arguments);
-  ABC.UIBase.apply(this, arguments);
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+	// yeoman.generators.Base.apply(this, arguments);
+	ABC.UIBase.apply(this, arguments);
+	this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 
     this.on('end', function () {
         this.prompt([{
@@ -26,14 +24,13 @@ var ClamGenerator = module.exports = function ClamGenerator(args, options, confi
             this.initPage = (/y/i).test(props.initPage);
 
             if (this.initPage) {
-                this.invoke('clam:page')
+                this.invoke('clam page')
             }
 
         }.bind(this));
 
     }.bind(this));
 
-  //this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
 
 util.inherits(ClamGenerator, ABC.UIBase);
@@ -60,10 +57,10 @@ ClamGenerator.prototype.askFor = function askFor() {
   // console.log(this.yeoman);
 
 	var prompts = [{
-			type: 'confirm',
 			name: 'projectName',
 			message: 'Name of Project?',
-			default: path.basename(process.cwd())
+			default: path.basename(process.cwd()),
+			waring:''
 		},
         {
             name: 'author',
@@ -79,11 +76,17 @@ ClamGenerator.prototype.askFor = function askFor() {
         }
 	];
 
-  this.prompt(prompts, function (props) {
-    this.someOption = props.someOption;
+    this.prompt(prompts, function (err, props) {
+        if (err) {
+            return this.emit('error', err);
+        }
 
-    cb();
-  }.bind(this));
+        this.projectName = props.projectName;
+        this.author = props.author;
+        this.email = props.email;
+
+        cb();
+    }.bind(this));
 };
 
 ClamGenerator.prototype.app = function app() {

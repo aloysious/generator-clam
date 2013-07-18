@@ -1,6 +1,6 @@
 {
   "name": "generator-clam",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "A Clam generator for Yeoman",
   "keywords": [
     "yeoman-generator",
@@ -10,10 +10,12 @@
   "homepage": "https://github.com/jayli/generator-clam",
   "bugs": "https://github.com/jayli/generator-clam/issues",
   "author": {
-    "name": "lijing00333",
-    "email": "lijing00333@163.com",
+    "name": "bachi",
+    "email": "bachi@taobao.com",
     "url": "https://github.com/jayli"
   },
+  "readmeFilename": "README.md",
+  "_from": "generator-clam@",
   "main": "app/index.js",
   "repository": {
     "type": "git",
