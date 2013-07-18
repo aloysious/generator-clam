@@ -23,7 +23,9 @@ AppGenerator.prototype.askFor = function askFor() {
 	try {
 		abcJSON = require(path.resolve(process.cwd(), 'abc.json'));
 		this.projectName = abcJSON.name;
-	} catch (e) {}
+	} catch (e) {
+		console.log('请在clam项目目录内执行');
+	}
 
 
     // welcome message

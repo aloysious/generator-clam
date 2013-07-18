@@ -45,6 +45,7 @@ ClamGenerator.prototype.askFor = function askFor() {
     try {
         abcJSON = require(path.resolve(process.cwd(), 'abc.json'));
     } catch (e) {
+
     }
     if (!abcJSON.author) {
         abcJSON.author = {
