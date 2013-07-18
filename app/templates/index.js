@@ -11,7 +11,10 @@ KISSY.add(function(S) {
 
 	return {
 		init:function(){
-			// DO Your jobs
+
+			// Do Your jobs
+			alert('ok');
+
 		}
 	};
 	

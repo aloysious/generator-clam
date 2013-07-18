@@ -1,20 +1,31 @@
 /**
  * @fileoverview <%= projectName %> - <%= mojoName %>.
- * @author <%= author %><<%= email %>>
+ * @author 
  */
 /**
  * KISSY.use('<%= projectName %>/<%= mojoName %>/index',function(S,<%= mojoName %>){
  *		<%= mojoName %>.init();
  * });
  */
-KISSY.add(function(S) {
+KISSY.add(function(S,RichBase) {
 
-	return {
-		init:function(){
-			// DO Your jobs
+	var <%= mojoName %> = RichBase.extend({
+		initializer:function(){
+			var self = this;
+
+			// Your Init Code
+			alert('ok');
 		}
-	};
+	},{
+		ATTRS: {
+			A:{
+				value:'abc'
+			}
+		}
+	});
+
+	return <%= mojoName %>;
 	
 },{
-	requires:[]	
+	requires:['rich-base']	
 });
