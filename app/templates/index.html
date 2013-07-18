@@ -1,44 +1,52 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title><%= projectName %> demo</title>
-		<link rel="stylesheet" href="index.css"/>
-		<script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js"></script>
-		<script>
-			if (S.Config.debug) {
-				var srcPath = "./";
-				S.config({
-					packages:[
-						{
-							name:"<%= projectName %>",
-							path:srcPath,
-							charset:"utf-8",
-							ignorePackageNameInUri:true,
-							debug:true
-						}
-					]
-				});
-			} else {
-				KISSY.config({
-					packages: [
-						{
-							name: '<%= projectName %>',
-							// 发布到线上时需要带上版本号
-							path: 'http://a.tbcdn.cn/g/业务线Group/<%= projectName %>',
-							ignorePackageNameInUri: true
-						}
-					]
-				});
-			}
-		</script>
-	</head>
-	<body>
-		<!--Your Code Here-->
-		<script>
-			KISSY.use('<%= projectName %>/index', function(S, <%= projectName %>) {
-				<%= projectName %>.init();
-			});	
-		</script>
-	</body>
+<!DOCTYPE HTML>
+<!--[if lt IE 7]><html class="no-js ie ie6 lte9 lte8 lte7"> <![endif]-->
+<!--[if IE 7]><html class="no-js ie ie7 lte9 lte8 lte7"> <![endif]-->
+<!--[if IE 8]><html class="no-js ie ie8 lte9 lte8"> <![endif]-->
+<!--[if IE 9]><html class="no-js ie ie9 lte9"> <![endif]-->
+<!--[if gt IE 9]><html class="no-js"><![endif]-->
+<!--[if !IE]><!--><html><!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title><%= projectName %> demo</title>
+	<link rel="stylesheet" href="index.css"/>
+	<script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js"></script>
+	<script>
+		if (KISSY.Config.debug) {
+			var srcPath = "./";
+			KISSY.config({
+				packages:[
+					{
+						name:"<%= projectName %>",
+						path:srcPath,
+						charset:"utf-8",
+						ignorePackageNameInUri:true,
+						debug:true
+					}
+				]
+			});
+		} else {
+			KISSY.config({
+				packages: [
+					{
+						name: '<%= projectName %>',
+						// 发布到线上时需要带上版本号
+						path: 'http://a.tbcdn.cn/g/业务线Group/<%= projectName %>',
+						ignorePackageNameInUri: true
+					}
+				]
+			});
+		}
+	</script>
+</head>
+<body>
+
+	<!--Your Code Here-->
+	<!--#include virtual="引用其他html片段地址" -->
+
+	<script>
+		KISSY.use('<%= projectName %>/index', function(S, <%= projectName %>) {
+			<%= projectName %>.init();
+		});	
+	</script>
+</body>
 </html>

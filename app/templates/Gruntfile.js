@@ -1,4 +1,9 @@
+var path = require('path'),
+	fs = require('fs'),
+	os = require('os');
+
 module.exports = function (grunt) {
+
 
 	var file = grunt.file;
 	var task = grunt.task;
@@ -37,8 +42,8 @@ module.exports = function (grunt) {
                         path: '../',
 						charset:'utf-8'
                     }
-                ]
-				map: [['<%%= pkg.name %>/', 'biz/<%%= pkg.name %>/<%%= currentBranch %>/']]
+                ],
+				map: [['<%%= pkg.name %>/', '<%%= pkg.name %>/<%%= currentBranch %>/']]
             },
 
             main: {
@@ -115,7 +120,7 @@ module.exports = function (grunt) {
 					outdir: 'where/to/save/docs/'
 				}
 			}
-		}
+		},
 
         /**
          * 将LESS编译为CSS
