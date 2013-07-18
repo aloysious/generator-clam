@@ -11,8 +11,8 @@ var ClamGenerator = module.exports = function ClamGenerator(args, options, confi
 
     this.on('end', function () {
         this.prompt([{
-            name: 'initPage',
-            message: 'Do you add a page right now?',
+            name: 'initMojo',
+            message: 'Do you add a Module right now?',
             default: 'Y/n',
             warning: ''
         }], function (err, props) {
@@ -21,10 +21,10 @@ var ClamGenerator = module.exports = function ClamGenerator(args, options, confi
                 return this.emit('error', err);
             }
 
-            this.initPage = (/y/i).test(props.initPage);
+            this.initMojo= (/y/i).test(props.initMojo);
 
-            if (this.initPage) {
-                this.invoke('clam first-page')
+            if (this.initMojo) {
+                this.invoke('clam:mojo')
             }
 
         }.bind(this));
@@ -55,13 +55,15 @@ ClamGenerator.prototype.askFor = function askFor() {
 
   // have Yeoman greet the user.
   // console.log(this.yeoman);
+	var folderName = path.basename(process.cwd());
 
-	var prompts = [{
-			name: 'projectName',
-			message: 'Name of Project?',
-			default: path.basename(process.cwd()),
-			waring:''
-		},
+    var prompts = [
+        {
+            name: 'projectName',
+            message: 'Name of Project?',
+            default: folderName.charAt(0).toUpperCase() + folderName.substr(1),
+            warning: ''
+        },
         {
             name: 'author',
             message: 'Author Name:',
@@ -122,6 +124,7 @@ ClamGenerator.prototype.app = function app() {
     this.template('index.css');
     this.template('index.html');
 };
+
 ClamGenerator.prototype.install = function install() {
     var cb = this.async();
     this.npmInstall('', {}, function (err) {
@@ -130,7 +133,30 @@ ClamGenerator.prototype.install = function install() {
             return console.log('error', err);
         }
 
-        console.log('\n\nnpm was installed successful. \n\n');
+        console.log(green('\n\nnpm was installed successful. \n\n'));
 
     });
 };
+
+function consoleColor(str,num){
+	if (!num) {
+		num = '32';
+	}
+	return "\033[" + num +"m" + str + "\033[0m"
+}
+
+function green(str){
+	return consoleColor(str,32);
+}
+
+function yellow(str){
+	return consoleColor(str,33);
+}
+
+function red(str){
+	return consoleColor(str,31);
+}
+
+function blue(str){
+	return consoleColor(str,34);
+}
