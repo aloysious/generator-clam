@@ -7,7 +7,7 @@
 <!--[if !IE]><!--><html><!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	<title> <%= projectName %> - <%= mojoName %> demo </title>
+	<title> <%= projectName %> - <%= modName %> demo </title>
 	<link rel="stylesheet" href="index.css"/>
 	<script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js"></script>
 	<script>
@@ -44,8 +44,8 @@
 	<!--#include virtual="引用其他html片段地址" -->
 
 	<script>
-		KISSY.use('<%= packageName %>/<%= mojoName %>/index', function(S, <%= mojoName %>) {
-			new <%= mojoName %>();
+		KISSY.use('<%= packageName %>/<%= mojoName %>/index', function(S, <%= modName %>) {
+			new <%= modName %>();
 		});	
 	</script>
 </body>

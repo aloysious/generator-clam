@@ -32,17 +32,27 @@ AppGenerator.prototype.askFor = function askFor() {
 	var prompts = [{
 			name: 'mojoName',
 			message: 'Name of Module?',
-			default: 'YourMojoName',
+			default: 'your-mojo-name',
 			waring:''
 		}
 	];
+
+	// your-mojo-name => YourMojoName
+	function parseMojoName(name){
+		return replace(/\b(\w)|(-\w)/g,function(m){
+			return m.toUpperCase().replace('-','');
+		});
+	}
 
     this.prompt(prompts, function (err, props) {
         if (err) {
             return this.emit('error', err);
         }
 
-        this.mojoName = props.mojoName;
+		var _tname = props.mojoName;
+
+        this.mojoName = props.mojoName;// your-mod-name
+		this.modName = parseMojoName(this.mojoName);//YourModName
 		this.projectName = abcJSON.name;//Abc
 		this.packageName = this.projectName.toLowerCase(); //abc
 

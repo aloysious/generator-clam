@@ -1,15 +1,15 @@
 /**
- * @fileoverview <%= projectName %> - <%= mojoName %>.
+ * @fileoverview <%= projectName %> - <%= modName %>.
  * @author 
  */
 /**
- * KISSY.use('<%= projectName %>/<%= mojoName %>/index',function(S,<%= mojoName %>){
- *		new <%= mojoName %>();
+ * KISSY.use('<%= projectName %>/<%= mojoName %>/index',function(S,<%= modName %>){
+ *		new <%= modName %>();
  * });
  */
 KISSY.add(function(S,RichBase) {
 
-	var <%= mojoName %> = RichBase.extend({
+	var <%= modName %> = RichBase.extend({
 		initializer:function(){
 			var self = this;
 
@@ -24,7 +24,7 @@ KISSY.add(function(S,RichBase) {
 		}
 	});
 
-	return <%= mojoName %>;
+	return <%= modName %>;
 	
 },{
 	requires:['rich-base']	
