@@ -9,6 +9,8 @@ module.exports = function (grunt) {
 	var task = grunt.task;
 	var pathname = path.basename(__dirname);
 	var files = doWalk('./');
+	// files.js 存储项目中的所有js文件
+	// file.css 存储项目中的所有css文件
 
     /**
      * 对每个具体任务进行配置
@@ -31,24 +33,28 @@ module.exports = function (grunt) {
         },
 
         /**
-         * 进行KISSY 打包
-         * @link https://github.com/daxingplay/grunt-kmc
+         * 进行KISSY 打包，仅做合并
+         * 		@link https://github.com/daxingplay/grunt-kmc
+		 *
+		 * 如果需要只生成依赖关系表，请使用clam-tools:
+		 * 		@link http://gitlab.alibaba-inc.com/jay.li/clam-tools
          */
         kmc: {
             options: {
                 packages: [
                     {
-                        name: '<%%= pkg.name %>',
+                        name: '<%= pkg.name %>',
                         path: '../',
 						charset:'utf-8'
                     }
                 ],
-				map: [['<%%= pkg.name %>/', '<%%= pkg.name %>/<%%= currentBranch %>/']]
+				map: [['<%= pkg.name %>/', '<%= pkg.name %>/<%= currentBranch %>/']]
             },
 
             main: {
                 files: [
                     {
+						// 这里指定项目根目录下所有文件为入口文件，自定义入口请自行添加
                         expand: true,
                         src: [ '*.js', '!Gruntfile.js'],
                         dest: 'build/'
@@ -64,15 +70,7 @@ module.exports = function (grunt) {
                         dest: "build/index.js"
                     }
                 ]
-            },
-			"another-example":{
-                files: [
-                    {
-                        src: "index.js",
-                        dest: "build/index.js"
-                    }
-                ]
-			}
+            }
 			*/
         },
 
@@ -94,6 +92,7 @@ module.exports = function (grunt) {
         },
         /**
          * CSS-Combo
+		 * combo项目中所有css，通过@import "other.css"; 来处理依赖关系
          */
         css_combo: {
             options: {
@@ -104,20 +103,24 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        src: '*.css',
+                        src:files.css, 
                         dest: 'build/',
                         ext: '.css'
                     }
                 ]
             }
         },
+		/**
+		 * YUIDoc
+		 * 对build目录中的js文件生成文档，放入doc/中
+		 */
 		yuidoc: {
 			compile: {
-				name: '<%= pkg.name %>',
-				description: '<%= pkg.description %>',
+				name: 'generator-clam',
+				description: 'A Clam generator for Yeoman',
 				options: {
-					paths: 'path/to/source/code/',
-					outdir: 'where/to/save/docs/'
+					paths: 'build/',
+					outdir: 'doc/'
 				}
 			}
 		},
@@ -149,7 +152,7 @@ module.exports = function (grunt) {
          */
         uglify: {
             options: {
-                banner: '/*! <%%= pkg.name %> <%%= grunt.template.today("yyyy-mm-dd") %> */\n',
+                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
                 beautify: {
                     ascii_only: true
                 }
@@ -205,10 +208,10 @@ module.exports = function (grunt) {
 		 */
 		exec: {
 			tag: {
-				command: 'git tag publish/<%%= currentBranch %>'
+				command: 'git tag publish/<%= currentBranch %>'
 			},
 			publish: {
-				command: 'git push origin publish/<%%= currentBranch %>:publish/<%%= currentBranch %>'
+				command: 'git push origin publish/<%= currentBranch %>:publish/<%= currentBranch %>'
 			},
 			grunt: {
 				command: 'grunt default:publish'
@@ -268,7 +271,7 @@ module.exports = function (grunt) {
 	function walk(uri, files) {
 
 		var stat = fs.lstatSync(uri);
-		if (stat.isFile() && !/(build|node_modules|demo|\.git|\.+)[\\|\/]/i.test(uri) && !/grunt.+/i.test(uri)) {
+		if (stat.isFile() && !/(build|node_modules|demo|doc|\.git|\.+)[\\|\/]/i.test(uri) && !/grunt.+/i.test(uri)) {
 
 			switch (path.extname(uri)) {
 			case '.css':

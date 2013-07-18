@@ -91,7 +91,7 @@ ClamGenerator.prototype.askFor = function askFor() {
         }
 
         this.packageName = props.projectName;// project-name 
-		this.projectName = parseMojoName(props.packageName); //ProjectName
+		this.projectName = parseMojoName(this.packageName); //ProjectName
         this.author = props.author;
         this.email = props.email;
 
