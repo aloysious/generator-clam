@@ -57,11 +57,18 @@ ClamGenerator.prototype.askFor = function askFor() {
   // console.log(this.yeoman);
 	var folderName = path.basename(process.cwd());
 
+	// your-mojo-name => YourMojoName
+	function parseMojoName(name){
+		return name.replace(/\b(\w)|(-\w)/g,function(m){
+			return m.toUpperCase().replace('-','');
+		});
+	}
+
     var prompts = [
         {
             name: 'projectName',
             message: 'Name of Project?',
-            default: folderName.charAt(0).toUpperCase() + folderName.substr(1),
+            default: folderName,
             warning: ''
         },
         {
@@ -83,8 +90,8 @@ ClamGenerator.prototype.askFor = function askFor() {
             return this.emit('error', err);
         }
 
-        this.projectName = props.projectName;// Abc
-		this.packageName = props.projectName.toLowerCase(); //abc
+        this.packageName = props.projectName;// project-name 
+		this.projectName = parseMojoName(props.packageName); //ProjectName
         this.author = props.author;
         this.email = props.email;
 
