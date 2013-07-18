@@ -1,0 +1,40 @@
+{
+  "name": "generator-clam",
+  "version": "0.0.0",
+  "description": "A Clam generator for Yeoman",
+  "keywords": [
+    "yeoman-generator",
+	"clam",
+	"generator-clam"
+  ],
+  "homepage": "https://github.com/jayli/generator-clam",
+  "bugs": "https://github.com/jayli/generator-clam/issues",
+  "author": {
+    "name": "lijing00333",
+    "email": "lijing00333@163.com",
+    "url": "https://github.com/jayli"
+  },
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jayli/generator-clam.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "abc-generator": "~0.0.3",
+    "yeoman-generator": "~0.12.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.10.0"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}

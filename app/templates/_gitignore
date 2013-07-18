@@ -1,0 +1,11 @@
+.DS_Store
+node_modules
+npm-debug.log
+*.swp
+.sw*
+.idea/*
+.editorconfig
+.jshintrc
+.travis.yml
+.sass-cache/
+mods/.sass-cache/

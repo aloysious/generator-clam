@@ -1,0 +1,13 @@
+{
+    "name": "<%= projectName %>",
+    "desc": "description of your app",
+    "type": "clam",
+    "author": {
+        "name": "<%= author %>",
+        "email": "<%= email %>"
+    },
+	"repository": {
+        "type": "git",
+        "url": ""
+    }
+}
