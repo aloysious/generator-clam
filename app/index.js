@@ -24,7 +24,7 @@ var ClamGenerator = module.exports = function ClamGenerator(args, options, confi
             this.initPage = (/y/i).test(props.initPage);
 
             if (this.initPage) {
-                this.invoke('clam page')
+                this.invoke('clam first-page')
             }
 
         }.bind(this));
@@ -123,7 +123,6 @@ ClamGenerator.prototype.app = function app() {
     this.template('index.html');
 };
 ClamGenerator.prototype.install = function install() {
-	return;
     var cb = this.async();
     this.npmInstall('', {}, function (err) {
 
