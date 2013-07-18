@@ -3,7 +3,7 @@
  * @author 
  */
 /**
- * KISSY.use('<%= projectName %>/<%= mojoName %>/index',function(S,<%= modName %>){
+ * KISSY.use('<%= packageName %>/<%= mojoName %>/index',function(S,<%= modName %>){
  *		new <%= modName %>();
  * });
  */

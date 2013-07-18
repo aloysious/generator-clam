@@ -39,7 +39,7 @@ AppGenerator.prototype.askFor = function askFor() {
 
 	// your-mojo-name => YourMojoName
 	function parseMojoName(name){
-		return replace(/\b(\w)|(-\w)/g,function(m){
+		return name.replace(/\b(\w)|(-\w)/g,function(m){
 			return m.toUpperCase().replace('-','');
 		});
 	}
