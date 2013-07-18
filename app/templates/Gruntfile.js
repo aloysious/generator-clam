@@ -144,26 +144,6 @@ module.exports = function (grunt) {
         },
 
         /**
-         * 编译Compass & SASS
-         * @link https://github.com/gruntjs/grunt-contrib-compass
-         */
-        compass: {
-            options: {
-                outputStyle: 'nested',
-                noLineComments: true,
-                importPath:  './',
-                trace: true
-            },
-
-            main: {
-                options: {
-                    sassDir: './',
-                    cssDir: 'build/'
-                }
-            }
-        },
-
-        /**
          * 对JS文件进行压缩
          * @link https://github.com/gruntjs/grunt-contrib-uglify
          */
@@ -217,10 +197,6 @@ module.exports = function (grunt) {
             'less': {
                 files: [ '*.less', 'mods/*.less' ],
                 tasks: ['less', 'cssmin']
-            },
-            'compass': {
-                files: [ '*.scss', 'mods/*.scss'],
-                tasks: ['compass', 'cssmin']
             }
         },
 
@@ -256,11 +232,6 @@ module.exports = function (grunt) {
 						src: files.less, 
 						dest: 'build/', 
 						filter: 'isFile'
-					},
-					{
-						src: files.scss, 
-						dest: 'build/', 
-						filter: 'isFile'
 					}
 				]
 			}
@@ -275,7 +246,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-css-combo');
     grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-kissy-template');
@@ -283,7 +253,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-concat-css');
 	grunt.loadNpmTasks('grunt-contrib-yuidoc');
 
 	/**
@@ -367,7 +336,7 @@ module.exports = function (grunt) {
 
 		// 任务
 		if (!type) {
-			task.run(['clean:build', 'ktpl', 'copy', 'kmc', 'uglify', 'css_combo' ,'less', 'compass', 'cssmin','yuidoc'/*, 'copy', 'clean:mobile'*/]);
+			task.run(['clean:build', 'ktpl', 'copy', 'kmc', 'uglify', 'css_combo' ,'less', 'cssmin','yuidoc'/*, 'copy', 'clean:mobile'*/]);
 		} else if ('publish' === type) {
 			task.run(['exec:tag', 'exec:publish']);
 		}

@@ -4,7 +4,7 @@
  */
 /**
  * KISSY.use('<%= projectName %>/<%= mojoName %>/index',function(S,<%= mojoName %>){
- *		<%= mojoName %>.init();
+ *		new <%= mojoName %>();
  * });
  */
 KISSY.add(function(S,RichBase) {
@@ -13,7 +13,7 @@ KISSY.add(function(S,RichBase) {
 		initializer:function(){
 			var self = this;
 
-			// Your Init Code
+			// Your Code
 			alert('ok');
 		}
 	},{

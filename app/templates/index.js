@@ -3,7 +3,7 @@
  * @author <%= author %><<%= email %>>
  */
 /**
- * KISSY.use('<%= projectName %>/index',function(S,<%= projectName %>){
+ * KISSY.use('<%= packageName %>/index',function(S,<%= projectName %>){
  *		<%= projectName %>.init();
  * });
  */
@@ -12,7 +12,7 @@ KISSY.add(function(S) {
 	return {
 		init:function(){
 
-			// Do Your jobs
+			// Your Code
 			alert('ok');
 
 		}

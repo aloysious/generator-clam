@@ -83,7 +83,8 @@ ClamGenerator.prototype.askFor = function askFor() {
             return this.emit('error', err);
         }
 
-        this.projectName = props.projectName;
+        this.projectName = props.projectName;// Abc
+		this.packageName = props.projectName.toLowerCase(); //abc
         this.author = props.author;
         this.email = props.email;
 
@@ -112,7 +113,7 @@ ClamGenerator.prototype.git = function git() {
 };
 
 ClamGenerator.prototype.jshint = function jshint() {
-    this.copy('jshintrc', '.jshintrc');
+    // this.copy('jshintrc', '.jshintrc');
 };
 
 ClamGenerator.prototype.app = function app() {

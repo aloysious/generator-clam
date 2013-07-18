@@ -19,6 +19,12 @@ util.inherits(AppGenerator, ABC.UIBase);
 
 AppGenerator.prototype.askFor = function askFor() {
 	var cb = this.async();
+	
+	try {
+		abcJSON = require(path.resolve(process.cwd(), 'abc.json'));
+		this.projectName = abcJSON.name;
+	} catch (e) {}
+
 
     // welcome message
     this.log(this.abcLogo);
@@ -37,7 +43,8 @@ AppGenerator.prototype.askFor = function askFor() {
         }
 
         this.mojoName = props.mojoName;
-		this.projectName = this.pkg.name;
+		this.projectName = abcJSON.name;//Abc
+		this.packageName = this.projectName.toLowerCase(); //abc
 
         cb();
     }.bind(this));

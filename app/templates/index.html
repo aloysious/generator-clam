@@ -7,7 +7,7 @@
 <!--[if !IE]><!--><html><!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	<title><%= projectName %> demo</title>
+	<title><%= projectName %> - index demo</title>
 	<link rel="stylesheet" href="index.css"/>
 	<script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js"></script>
 	<script>
@@ -16,7 +16,7 @@
 			KISSY.config({
 				packages:[
 					{
-						name:"<%= projectName %>",
+						name:"<%= packageName %>",
 						path:srcPath,
 						charset:"utf-8",
 						ignorePackageNameInUri:true,
@@ -28,9 +28,9 @@
 			KISSY.config({
 				packages: [
 					{
-						name: '<%= projectName %>',
+						name: '<%= packageName %>',
 						// 发布到线上时需要带上版本号
-						path: 'http://a.tbcdn.cn/g/业务线Group/<%= projectName %>',
+						path: 'http://a.tbcdn.cn/g/业务线Group/<%= packageName %>',
 						ignorePackageNameInUri: true
 					}
 				]
@@ -44,7 +44,7 @@
 	<!--#include virtual="引用其他html片段地址" -->
 
 	<script>
-		KISSY.use('<%= projectName %>/index', function(S, <%= projectName %>) {
+		KISSY.use('<%= packageName %>/index', function(S, <%= projectName %>) {
 			<%= projectName %>.init();
 		});	
 	</script>
