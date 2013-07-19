@@ -2,6 +2,7 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
+var ClamLogo = require('./logo').ClamLogo;
 var ABC = require('abc-generator');
 
 var ClamGenerator = module.exports = function ClamGenerator(args, options, config) {
@@ -27,7 +28,8 @@ ClamGenerator.prototype.askFor = function askFor() {
 	var cb = this.async();
 
     // welcome message
-    this.log(this.abcLogo);
+	console.log(ClamLogo(this));
+    // this.log(this.abcLogo);
 
     var abcJSON = {};
     try {

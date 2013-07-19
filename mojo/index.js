@@ -1,6 +1,7 @@
 // 'use strict';
 var util = require('util');
 var path = require('path');
+var ClamLogo = require('../app/logo').ClamLogo;
 var yeoman = require('yeoman-generator');
 var ABC = require('abc-generator');
 
@@ -45,7 +46,7 @@ AppGenerator.prototype.askFor = function askFor() {
 	this.projectName = abcJSON.name;
 
     // welcome message
-    this.log(this.abcLogo);
+	console.log(ClamLogo(this));
 
 	var prompts = [{
 			name: 'mojoName',
