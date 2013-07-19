@@ -12,15 +12,15 @@ blue(' \\_____|______/_/    \\_\\_|  |_|\n\n');
 	logo += ('need help?')+ blue('  ===>  ') + green('yo clam:h') + '\n';
 
 	if(contex){
-		logo += '❯❯❯❯❯❯❯❯❯❯ '+green(contex.generatorName.toUpperCase())+' ❮❮❮❮❮❮❮❮❮❮';
+		logo += '\n❯❯❯❯❯❯❯❯❯❯❯ '+green(contex.generatorName.toUpperCase())+' ❮❮❮❮❮❮❮❮❮❮❮\n';
 	}
 
 	return logo;
 };
 
-console.log(ClamLogo());
+// console.log(ClamLogo());
 
-module.exports = ClamLogo;
+exports.ClamLogo = ClamLogo;
 
 function consoleColor(str,num){
 	if (!num) {
