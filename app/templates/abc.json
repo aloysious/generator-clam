@@ -1,7 +1,9 @@
 {
-    "name": "<%= projectName %>",
+    "name": "<%= packageName %>",
     "desc": "description of your app",
     "type": "clam",
+	"group":"<%= groupName %>",
+	"src":"<%= srcDir %>",
     "author": {
         "name": "<%= author %>",
         "email": "<%= email %>"

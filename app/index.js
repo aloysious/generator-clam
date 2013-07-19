@@ -5,32 +5,20 @@ var yeoman = require('yeoman-generator');
 var ABC = require('abc-generator');
 
 var ClamGenerator = module.exports = function ClamGenerator(args, options, config) {
-	// yeoman.generators.Base.apply(this, arguments);
 	ABC.UIBase.apply(this, arguments);
 	this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 
     this.on('end', function () {
-        this.prompt([{
-            name: 'initMojo',
-            message: 'Do you add a Module right now?',
-            default: 'Y/n',
-            warning: ''
-        }], function (err, props) {
+		var cb = this.async();
+		this.npmInstall('', {}, function (err) {
 
-            if (err) {
-                return this.emit('error', err);
-            }
+			if (err) {
+				return console.log('error', err);
+			}
 
-            this.initMojo= (/y/i).test(props.initMojo);
-
-            if (this.initMojo) {
-                this.invoke('clam:mojo')
-            }
-
-        }.bind(this));
-
+			console.log(green('\n\nnpm was installed successful. \n\n'));
+		});
     }.bind(this));
-
 };
 
 util.inherits(ClamGenerator, ABC.UIBase);
@@ -53,6 +41,9 @@ ClamGenerator.prototype.askFor = function askFor() {
             email: ''
         }
     }
+	if(!abcJSON.name){
+		abcJSON.name = 'tmp';
+	}
 
   // have Yeoman greet the user.
   // console.log(this.yeoman);
@@ -73,6 +64,12 @@ ClamGenerator.prototype.askFor = function askFor() {
             warning: ''
         },
         {
+            name: 'srcDir',
+            message: 'create "src" directory?',
+            default: 'N/y',
+            warning: ''
+        },
+        {
             name: 'author',
             message: 'Author Name:',
             default: abcJSON.author.name,
@@ -86,37 +83,50 @@ ClamGenerator.prototype.askFor = function askFor() {
         },
         {
             name: 'groupName',
-            message: 'Group Name(可留空):',
-            default: '',
+            message: 'Group Name:',
+            default: 'group-name',
             warning: ''
         }
 	];
+
+	/*
+	 * projectName：驼峰名称,比如 ProjectName
+	 * packageName：原目录名称，比如 project-name
+	 **/
 
     this.prompt(prompts, function (err, props) {
         if (err) {
             return this.emit('error', err);
         }
 
+		this.srcDir = false;
         this.packageName = props.projectName;// project-name 
 		this.projectName = parseMojoName(this.packageName); //ProjectName
         this.author = props.author;
         this.email = props.email;
         this.groupName = props.groupName;
+		this.srcDir = (/y/i).test(props.srcDir);
+		this.currentBranch = 'master';
+
+		/*
+		if (this.initMojo) {
+			this.invoke('clam:mojo')
+		}
+		*/
 
         cb();
     }.bind(this));
 };
 
 ClamGenerator.prototype.app = function app() {
-  //this.mkdir('app');
-  //this.mkdir('app/templates');
-
-  //this.copy('_package.json', 'package.json');
-  //this.copy('_bower.json', 'bower.json');
 };
 
 ClamGenerator.prototype.gruntfile = function gruntfile() {
-    this.template('Gruntfile.js');
+	if(this.srcDir){
+		this.copy('Gruntfile_src.js','Gruntfile.js');
+	} else {
+		this.copy('Gruntfile.js');
+	}
 };
 
 ClamGenerator.prototype.packageJSON = function packageJSON() {
@@ -132,26 +142,20 @@ ClamGenerator.prototype.jshint = function jshint() {
 };
 
 ClamGenerator.prototype.app = function app() {
-    this.mkdir('build');
+	if(this.srcDir){
+		this.mkdir('src');
+	} else {
+		this.template('index.js');
+		this.template('index.css');
+		this.template('index.html');
+	}
+	this.copy('README.md', 'README.md');
 	this.mkdir('doc');
-    this.copy('README.md', 'README.md');
-    this.template('abc.json');
-    this.template('index.js');
-    this.template('index.css');
-    this.template('index.html');
+	this.mkdir('build');
+	this.template('abc.json');
 };
 
-ClamGenerator.prototype.install = function install() {
-    var cb = this.async();
-    this.npmInstall('', {}, function (err) {
-
-        if (err) {
-            return console.log('error', err);
-        }
-
-        console.log(green('\n\nnpm was installed successful. \n\n'));
-
-    });
+ClamGenerator.prototype.install = function(){
 };
 
 function consoleColor(str,num){

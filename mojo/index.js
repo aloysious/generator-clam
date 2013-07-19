@@ -22,11 +22,27 @@ AppGenerator.prototype.askFor = function askFor() {
 	
 	try {
 		abcJSON = require(path.resolve(process.cwd(), 'abc.json'));
-		this.projectName = abcJSON.name;
 	} catch (e) {
-		console.log('请在clam项目目录内执行');
+		console.log('abc.json not found');
+		abcJSON = require(path.resolve(process.cwd(),'..', 'abc.json'));
 	}
 
+    if (!abcJSON.author) {
+        abcJSON.author = {
+            name: '',
+            email: ''
+        }
+    }
+
+	if(!abcJSON.name){
+		abcJSON.name = 'tmp';
+	}
+
+	if(!abcJSON.group){
+		abcJSON.group = 'groupName';
+	}
+
+	this.projectName = abcJSON.name;
 
     // welcome message
     this.log(this.abcLogo);
@@ -40,7 +56,7 @@ AppGenerator.prototype.askFor = function askFor() {
 	];
 
 	// your-mojo-name => YourMojoName
-	function parseMojoName(name){
+	function parseName(name){
 		return name.replace(/\b(\w)|(-\w)/g,function(m){
 			return m.toUpperCase().replace('-','');
 		});
@@ -54,9 +70,10 @@ AppGenerator.prototype.askFor = function askFor() {
 		var _tname = props.mojoName;
 
         this.mojoName = props.mojoName;// your-mod-name
-		this.modName = parseMojoName(this.mojoName);//YourModName
-		this.projectName = abcJSON.name;//Abc
-		this.packageName = this.projectName.toLowerCase(); //abc
+		this.modName = parseName(this.mojoName);//YourModName
+		this.packageName = abcJSON.name;// package-name
+        this.groupName = abcJSON.group;
+		this.projectName = parseName(this.packageName); //PackageName
 
         cb();
     }.bind(this));
