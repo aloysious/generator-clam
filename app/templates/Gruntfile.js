@@ -311,7 +311,7 @@ module.exports = function (grunt) {
 	/**
 	 * 监听修改 
 	 */
-	grunt.registerTask('watch', 'clam watch ...', function() {
+	grunt.registerTask('listen', 'clam watch ...', function() {
 		task.run('watch');
 	});
 
