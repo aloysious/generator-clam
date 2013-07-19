@@ -12,9 +12,8 @@ module.exports = function (grunt) {
 	// files.js 存储项目中的所有js文件
 	// file.css 存储项目中的所有css文件
 
-    /**
-     * 对每个具体任务进行配置
-     */
+	// ======================= 配置每个任务 ==========================
+	
     grunt.initConfig({
 
         pkg: grunt.file.readJSON('abc.json'),
@@ -60,7 +59,7 @@ module.exports = function (grunt) {
                         dest: 'build/'
                     }
                 ]
-            },
+            }
 			// 若有新任务，请自行添加
 			/*
             simple-example: {
@@ -267,9 +266,8 @@ module.exports = function (grunt) {
 		}
     });
 
-    /**
-     * 载入使用到的通过NPM安装的模块
-     */
+	// ======================= 载入使用到的通过NPM安装的模块 ==========================
+	
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-css-combo');
@@ -284,6 +282,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-yuidoc');
 
+	// =======================  注册Grunt 各个操作 ==========================
+	
 	/**
 	 * 正式发布
 	 */
@@ -326,8 +326,8 @@ module.exports = function (grunt) {
 	 **/
 	grunt.registerTask('newbranch', 'clam newBranch...', function() {
 		var done = this.async();
-		exec('git branch -a;git tag -l', function(err, stdout, stderr, cb) {
-			var r = getbiggestversion(stdout.match(/\d+\.\d+\.\d+/ig));
+		exec('git branch -a;git tag', function(err, stdout, stderr, cb) {
+			var r = getBiggestVersion(stdout.match(/\d+\.\d+\.\d+/ig));
 			if(!r){
 				r = '0.0.1';
 			} else {
@@ -340,6 +340,39 @@ module.exports = function (grunt) {
 			done();
 		});
 	});
+
+	// =======================  注册Grunt主流程  ==========================
+	
+	return grunt.registerTask('default', 'clam running ...', function(type) {
+
+		var done = this.async();
+
+		// 获取当前分支
+		exec('git branch', function(err, stdout, stderr, cb) {
+
+			var reg = /\*\s+daily\/(\S+)/,
+				match = stdout.match(reg);
+
+			if (!match) {
+				return grunt.log.error('当前分支为 master 或者名字不合法(daily/x.y.z)，请切换分支'.red);
+			}
+			grunt.log.write(('当前分支：' + match[1]).green);
+			grunt.config.set('currentBranch', match[1]);
+			done();
+		});
+
+		// 构建和发布任务
+		if (!type) {
+			task.run(['clean:build', 'ktpl', 'copy', 'kmc', 'uglify', 'css_combo' ,'less','concat', 'cssmin','yuidoc'/*, 'copy', 'clean:mobile'*/]);
+		} else if ('publish' === type) {
+			task.run(['exec:tag', 'exec:publish']);
+		} else if ('prepub' === type) {
+			task.run(['exec:add','exec:commit','exec:prepub']);
+		}
+
+	});
+
+	// =======================  辅助函数  ==========================
 
 	// 启动clam server
 	function initClamServer(){
@@ -391,78 +424,48 @@ module.exports = function (grunt) {
 		return files;
 	}
 
-
-    // 打包
-	return grunt.registerTask('default', 'clam running ...', function(type) {
-
-		var done = this.async();
-
-		// 获取当前分支
-		exec('git branch', function(err, stdout, stderr, cb) {
-
-			var reg = /\*\s+daily\/(\S+)/,
-				match = stdout.match(reg);
-
-			if (!match) {
-				return grunt.log.error('当前分支为 master 或者名字不合法(daily/x.y.z)，请切换分支'.red);
+	function getBiggestVersion(A){
+		var a = [];
+		var b = [];
+		var t = [];
+		var r = [];
+		for(var i= 0;i< A.length;i++){
+			if(A[i].match(/^\d+\.\d+\.\d+$/)){
+				var sp = A[i].split('.');
+				a.push([
+					Number(sp[0]),Number(sp[1]),Number(sp[2])
+				]);
 			}
-			grunt.log.write(('当前分支：' + match[1]).green);
-			grunt.config.set('currentBranch', match[1]);
-			done();
-		});
-
-		// 构建和发布任务
-		if (!type) {
-			task.run(['clean:build', 'ktpl', 'copy', 'kmc', 'uglify', 'css_combo' ,'less','concat', 'cssmin','yuidoc'/*, 'copy', 'clean:mobile'*/]);
-		} else if ('publish' === type) {
-			task.run(['exec:tag', 'exec:publish']);
-		} else if ('prepub' === type) {
-			task.run(['exec:add','exec:commit','exec:prepub']);
 		}
+		
+		var r = findMax(findMax(findMax(a,0),1),2);
+		return r[0];
+	}
 
-	});
+	// a：二维数组，index，比较第几个
+	// return：返回保留比较后的结果组成的二维数组
+	function findMax(a,index){
+		var t = [];
+		var b = [];
+		var r = [];
+		for(var i = 0;i<a.length;i++){
+			t.push(Number(a[i][index]));
+		}
+		var max = Math.max.apply(this,t);
+		for(var i = 0;i<a.length;i++){
+			if(a[i][index] === max){
+				b.push(i);
+			}
+		}
+		for(var i = 0;i<b.length;i++){
+			r.push(a[b[i]]);
+		}
+		return r;
+	}
+
     
 };
 
-
-function getBiggestVersion(A){
-	var a = [];
-	var b = [];
-	var t = [];
-	var r = [];
-	for(var i= 0;i< A.length;i++){
-		if(A[i].match(/^\d+\.\d+\.\d+$/)){
-			var sp = A[i].split('.');
-			a.push([
-				Number(sp[0]),Number(sp[1]),Number(sp[2])
-			]);
-		}
-	}
-	
-	var r = findMax(findMax(findMax(a,0),1),2);
-	return r[0];
-}
-
-// a：二维数组，index，比较第几个
-// return：返回保留比较后的结果组成的二维数组
-function findMax(a,index){
-	var t = [];
-	var b = [];
-	var r = [];
-	for(var i = 0;i<a.length;i++){
-		t.push(Number(a[i][index]));
-	}
-	var max = Math.max.apply(this,t);
-	for(var i = 0;i<a.length;i++){
-		if(a[i][index] === max){
-			b.push(i);
-		}
-	}
-	for(var i = 0;i<b.length;i++){
-		r.push(a[b[i]]);
-	}
-	return r;
-}
 
 /*
 console.log(getBiggestVersion([

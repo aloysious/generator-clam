@@ -99,13 +99,12 @@ ClamGenerator.prototype.askFor = function askFor() {
             return this.emit('error', err);
         }
 
-		this.srcDir = false;
         this.packageName = props.projectName;// project-name 
 		this.projectName = parseMojoName(this.packageName); //ProjectName
         this.author = props.author;
         this.email = props.email;
         this.groupName = props.groupName;
-		this.srcDir = (/y/i).test(props.srcDir);
+		this.srcDir = (/^y/i).test(props.srcDir);
 		this.currentBranch = 'master';
 
 		/*
