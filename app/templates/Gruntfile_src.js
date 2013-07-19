@@ -47,7 +47,7 @@ module.exports = function (grunt) {
 						charset:'utf-8'
                     }
                 ],
-				map: [['<%= pkg.name %>/', '<%= pkg.name %>/<%= currentBranch %>/']]
+				map: [/*['<%= pkg.name %>/', '<%= pkg.name %>/<%= currentBranch %>/']*/]
             },
 
             main: {
@@ -257,12 +257,12 @@ module.exports = function (grunt) {
 
 		// 合并文件
 		concat: {
-			/*
 			dist: {
+			/*
 				src: ['from.css'],
 				dest: 'build/to.css'
-			}
 			*/
+			}
 		}
     });
 
@@ -288,6 +288,9 @@ module.exports = function (grunt) {
 	 * 正式发布
 	 */
 	grunt.registerTask('publish', 'clam publish...', function() {
+		task.run('exec:grunt_publish');
+	});
+	grunt.registerTask('pub', 'clam publish...', function() {
 		task.run('exec:grunt_publish');
 	});
 
@@ -354,7 +357,9 @@ module.exports = function (grunt) {
 				match = stdout.match(reg);
 
 			if (!match) {
-				return grunt.log.error('当前分支为 master 或者名字不合法(daily/x.y.z)，请切换分支'.red);
+				grunt.log.error('当前分支为 master 或者名字不合法(daily/x.y.z)，请切换到daily分支'.red);
+				grunt.log.error('创建新daily分支：grunt newbranch'.red);
+				return;
 			}
 			grunt.log.write(('当前分支：' + match[1]).green);
 			grunt.config.set('currentBranch', match[1]);
@@ -364,10 +369,11 @@ module.exports = function (grunt) {
 		// 构建和发布任务
 		if (!type) {
 			task.run(['clean:build', 'ktpl', 'copy', 'kmc', 'uglify', 'css_combo' ,'less','concat', 'cssmin','yuidoc'/*, 'copy', 'clean:mobile'*/]);
-		} else if ('publish' === type) {
+		} else if ('publish' === type || 'pub' === type) {
 			task.run(['exec:tag', 'exec:publish']);
 		} else if ('prepub' === type) {
-			task.run(['exec:add','exec:commit','exec:prepub']);
+			task.run(['exec:add','exec:commit']);
+			task.run(['exec:prepub']);
 		}
 
 	});
