@@ -8,9 +8,10 @@ module.exports = function (grunt) {
 	var file = grunt.file;
 	var task = grunt.task;
 	var pathname = path.basename(__dirname);
-	var files = doWalk('./');
+	var files = doWalk('./src/');
 	// files.js 存储项目中的所有js文件
 	// file.css 存储项目中的所有css文件
+	// file.less 存储项目中所有less文件
 
 	// ======================= 配置每个任务 ==========================
 	
@@ -47,7 +48,7 @@ module.exports = function (grunt) {
 						charset:'utf-8'
                     }
                 ],
-				map: [/*['<%= pkg.name %>/', '<%= pkg.name %>/<%= currentBranch %>/']*/]
+				map: [['<%= pkg.name %>/src/', '<%= pkg.name %>/']]
             },
 
             main: {
@@ -55,7 +56,8 @@ module.exports = function (grunt) {
                     {
 						// 这里指定项目根目录下所有文件为入口文件，自定义入口请自行添加
                         expand: true,
-                        src: [ '*.js', '!Gruntfile.js'],
+						cwd: 'src/',
+                        src: [ '**/*.js', '!Gruntfile.js'],
                         dest: 'build/'
                     }
                 ]
@@ -102,7 +104,8 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        src:files.css, 
+						cwd:'src',
+                        src: ['**/*.css'], 
                         dest: 'build/',
                         ext: '.css'
                     }
@@ -137,7 +140,8 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        src: '*.less',
+						cwd:'src/',
+                        src: ['**/*.less'],
                         dest: 'build/',
                         ext: '.css'
                     }
@@ -151,7 +155,7 @@ module.exports = function (grunt) {
          */
         uglify: {
             options: {
-					 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd hh:MM:ss") %> */\n',
+				 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd hh:MM:ss") %> */\n',
                 beautify: {
                     ascii_only: true
                 }
@@ -161,7 +165,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: 'build/',
-                        src: ['*.js', '!*-min.js'],
+                        src: ['**/*.js', '!*-min.js'],
                         dest: 'build/',
                         ext: '-min.js'
                     }
@@ -179,7 +183,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd: 'build/',
-                        src: ['*.css', '!*-min.css'],
+                        src: ['**/*.css', '!*-min.css'],
                         dest: 'build/',
                         ext: '-min.css'
                     }
@@ -189,15 +193,19 @@ module.exports = function (grunt) {
 
         watch: {
             'js': {
-                files: [ '*.js', 'mods/*.js', 'plugin/*.js' ],
+                files: [ 'src/**/*.js' ],
                 tasks: [ 'kmc', 'uglify' ]
             },
             'tpl': {
                 files: 'mods/*-tpl.html',
                 tasks: ['ktpl']
             },
+			'css':{
+                files: [ 'src/**/*.css' ],
+                tasks: [ 'copy','cssmin' ]
+			},
             'less': {
-                files: [ '*.less', 'mods/*.less' ],
+                files: [ 'src/**/*.less'],
                 tasks: ['less', 'cssmin']
             }
         },
@@ -237,18 +245,11 @@ module.exports = function (grunt) {
 			main: {
 				files:[
 					{
-						src: files.js, 
+						// src: files.js, 
+						expand:true,
+						src: ['**/*.js','**/*.css'], 
 						dest: 'build/', 
-						filter: 'isFile'
-					},
-					{
-						src: files.css, 
-						dest: 'build/', 
-						filter: 'isFile'
-					},
-					{
-						src: files.less, 
-						dest: 'build/', 
+						cwd:'src/',
 						filter: 'isFile'
 					}
 				]
@@ -302,6 +303,13 @@ module.exports = function (grunt) {
 	});
 
 	/**
+	 * 监听修改 
+	 */
+	grunt.registerTask('watch', 'clam watch ...', function() {
+		task.run('watch');
+	});
+
+	/**
 	 * 启动服务
 	 */
 	grunt.registerTask('on', 'clam server...', function() {
@@ -327,7 +335,7 @@ module.exports = function (grunt) {
 	/*
 	 * 获取当前最大版本号，并创建新分支
 	 **/
-	grunt.registerTask('newbranch', 'clam newBranch...', function() {
+	grunt.registerTask('newbranch', 'clam newBranch...', function(type) {
 		var done = this.async();
 		exec('git branch -a;git tag', function(err, stdout, stderr, cb) {
 			var r = getBiggestVersion(stdout.match(/\d+\.\d+\.\d+/ig));
@@ -338,7 +346,7 @@ module.exports = function (grunt) {
 				r = r.join('.');
 			}
 			grunt.log.write(('新分支：daily/' + r).green);
-			grunt.config.set('currentbranch', r);
+			grunt.config.set('currentBranch', r);
 			task.run(['exec:new_branch']);
 			done();
 		});
@@ -358,7 +366,7 @@ module.exports = function (grunt) {
 
 			if (!match) {
 				grunt.log.error('当前分支为 master 或者名字不合法(daily/x.y.z)，请切换到daily分支'.red);
-				grunt.log.error('创建新daily分支：grunt newbranch'.red);
+				grunt.log.error('创建新daily分支：grunt newbranch'.yellow);
 				return;
 			}
 			grunt.log.write(('当前分支：' + match[1]).green);

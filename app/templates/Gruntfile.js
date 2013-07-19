@@ -11,6 +11,7 @@ module.exports = function (grunt) {
 	var files = doWalk('./');
 	// files.js 存储项目中的所有js文件
 	// file.css 存储项目中的所有css文件
+	// file.less 存储项目中所有less文件
 
 	// ======================= 配置每个任务 ==========================
 	
@@ -55,7 +56,8 @@ module.exports = function (grunt) {
                     {
 						// 这里指定项目根目录下所有文件为入口文件，自定义入口请自行添加
                         expand: true,
-                        src: [ '*.js', '!Gruntfile.js'],
+						cwd: './',
+                        src: [ '**/.js', '!Gruntfile.js','!node_modules/*','!doc/*'],
                         dest: 'build/'
                     }
                 ]
@@ -137,7 +139,8 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        src: '*.less',
+						cwd:'./',
+                        src: files.less,
                         dest: 'build/',
                         ext: '.css'
                     }
@@ -151,7 +154,7 @@ module.exports = function (grunt) {
          */
         uglify: {
             options: {
-					 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd hh:MM:ss") %> */\n',
+				 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd hh:MM:ss") %> */\n',
                 beautify: {
                     ascii_only: true
                 }
@@ -189,15 +192,19 @@ module.exports = function (grunt) {
 
         watch: {
             'js': {
-                files: [ '*.js', 'mods/*.js', 'plugin/*.js' ],
+                files: [ '**/*.js' ],
                 tasks: [ 'kmc', 'uglify' ]
             },
             'tpl': {
                 files: 'mods/*-tpl.html',
                 tasks: ['ktpl']
             },
+			'css':{
+                files: [ '**/*.css' ],
+                tasks: [ 'copy','cssmin' ]
+			},
             'less': {
-                files: [ '*.less', 'mods/*.less' ],
+                files: [ '**/*.less'],
                 tasks: ['less', 'cssmin']
             }
         },
@@ -302,6 +309,14 @@ module.exports = function (grunt) {
 	});
 
 	/**
+	 * 监听修改 
+	 */
+	grunt.registerTask('watch', 'clam watch ...', function() {
+		task.run('watch');
+	});
+
+
+	/**
 	 * 启动服务
 	 */
 	grunt.registerTask('on', 'clam server...', function() {
@@ -358,7 +373,7 @@ module.exports = function (grunt) {
 
 			if (!match) {
 				grunt.log.error('当前分支为 master 或者名字不合法(daily/x.y.z)，请切换到daily分支'.red);
-				grunt.log.error('创建新daily分支：grunt newbranch'.red);
+				grunt.log.error('创建新daily分支：grunt newbranch'.yellow);
 				return;
 			}
 			grunt.log.write(('当前分支：' + match[1]).green);
