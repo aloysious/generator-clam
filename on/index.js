@@ -77,8 +77,7 @@ AppGenerator.prototype.askFor = function askFor() {
 
 	var prompts = [{
 			name: 'dirName',
-			message: 'alias [dirName] to / ?',
-			default: '',
+			message: 'alias [dirName] to / ?', default: '',
 			waring:''
 		},
 		{
@@ -166,7 +165,11 @@ function getDirFiles(dir){
 }
 
 function isDir(dir){
-	var stat = fs.lstatSync(dir);
-	return stat.isDirectory();
+	if(fs.existsSync(dir)){
+		var stat = fs.lstatSync(dir);
+		return stat.isDirectory();
+	} else {
+		return false;
+	}
 }
 
