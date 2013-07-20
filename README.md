@@ -36,6 +36,10 @@ A generator for Yeoman.
 
 	yo kissy-gallery 1.0
 
+## 打印帮助
+
+	yo clam:h
+
 ## Grunt 内嵌命令
 
 启动服务

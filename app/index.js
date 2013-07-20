@@ -29,7 +29,6 @@ ClamGenerator.prototype.askFor = function askFor() {
 
     // welcome message
 	console.log(ClamLogo(this));
-    // this.log(this.abcLogo);
 
     var abcJSON = {};
     try {

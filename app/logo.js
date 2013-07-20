@@ -18,8 +18,6 @@ blue(' \\_____|______/_/    \\_\\_|  |_|\n\n');
 	return logo;
 };
 
-// console.log(ClamLogo());
-
 exports.ClamLogo = ClamLogo;
 
 function consoleColor(str,num){
