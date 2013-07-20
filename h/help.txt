@@ -19,10 +19,10 @@
 
 CLAM 命令集成：
 	
-	yo clam			-> 	初始化一个 Project
-	yo clam:h		->	显示帮助
+	yo clam		-> 	初始化一个 Project
+	yo clam:h	->	显示帮助
 	yo clam:mojo	->	初始化一个模块单元
-	yo clam:on		->	启用 Server，使用:
+	yo clam:on	->	启用 Server，使用:
 
 			浏览目录：	http://127.0.0.1:8888/path/to/dir
 			打开文件：	http://127.0.0.1:8888/path/to/file
@@ -33,11 +33,11 @@ CLAM 命令集成：
 
 	Gruntfile.js 模板集成这些功能
 
-	grunt 			-> 	在daily分支中构建项目
+	grunt 		-> 	在daily分支中构建项目
 	grunt prepub	->	预发
 	grunt publish	->	发布
 	grunt newbranch	->	创建一个新版本分支
-	grunt info		->	打印当前项目的gitlab地址
+	grunt info	->	打印当前项目的gitlab地址
 	grunt listen	->	监听项目中文件修改并实时编译
 	
 
