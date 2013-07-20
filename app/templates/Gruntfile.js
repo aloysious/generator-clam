@@ -455,6 +455,9 @@ module.exports = function (grunt) {
 		var b = [];
 		var t = [];
 		var r = [];
+		if(!A){
+			return [0,0,0];
+		}
 		for(var i= 0;i< A.length;i++){
 			if(A[i].match(/^\d+\.\d+\.\d+$/)){
 				var sp = A[i].split('.');
