@@ -1,4 +1,7 @@
 # Generator-clam
+
+![](http://img04.taobaocdn.com/tps/i4/T1C5hpXwXeXXbkQf6j-210-45.jpg)
+
 [![Build Status](https://secure.travis-ci.org/jayli/generator-clam.png?branch=master)](https://travis-ci.org/jayli/generator-clam)
 
 A generator for Yeoman.
@@ -26,6 +29,10 @@ A generator for Yeoman.
 
 	yo clam:mojo
 
+启动服务
+
+	yo clam:on
+
 ## Widget 创建
 
 组件创建使用kissy-generator工具
@@ -41,10 +48,6 @@ A generator for Yeoman.
 	yo clam:h
 
 ## Grunt 内嵌命令
-
-启动服务
-
-	grunt on
 
 执行构建
 
@@ -66,4 +69,7 @@ A generator for Yeoman.
 
 	grunt newbranch
 
+监听文件修改，实时编译
+
+	grunt listen
 
