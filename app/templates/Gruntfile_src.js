@@ -33,11 +33,16 @@ module.exports = function (grunt) {
         },
 
         /**
-         * 进行KISSY 打包，仅做合并
+         * 将src目录中的KISSY文件做编译打包，仅做合并，源文件不需要指定名称
+		 * 		KISSY.add(function(S){});
+		 *
          * 		@link https://github.com/daxingplay/grunt-kmc
 		 *
-		 * 如果需要只生成依赖关系表，请使用clam-tools:
-		 * 		@link http://gitlab.alibaba-inc.com/jay.li/clam-tools
+		 * 如果需要只生成依赖关系表，不做合并，源文件必须指定名称，比如
+		 *		KISSY.add('group/project/file',function(S){});
+		 * 并在kmc.options中增加两个参数:
+		 *		depFilePath: 'build/mods.js',
+		 *		comboOnly: true,
          */
         kmc: {
             options: {
