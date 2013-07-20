@@ -9,7 +9,7 @@ var AppGenerator = module.exports = function AppGenerator(args, options, config)
 	ABC.UIBase.apply(this, arguments);
 
     this.on('end', function () {
-		helper.info();
+		//helper.info();
     }.bind(this));
 
 };
@@ -20,6 +20,7 @@ AppGenerator.prototype.askFor = function askFor() {
 	var cb = this.async();
 	
     // welcome message
-	console.log(ClamLogo(this));
+	// console.log(ClamLogo(this));
+	helper.info();
 };
 
