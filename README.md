@@ -19,7 +19,7 @@ A generator for Yeoman.
 
 安装clam
 
-	npm install -g generator-clam
+	npm install -g yo generator-clam
 
 初始化Project
 
