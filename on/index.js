@@ -6,7 +6,7 @@ var ClamLogo = require('../app/logo').ClamLogo;
 var ABC = require('abc-generator');
 var http = require('http');
 var flexCombo = require('flex-combo');
-var paperboy = require('paperboy');
+var jayli = require('jayli-server');
 
 var AppGenerator = module.exports = function AppGenerator(args, options, config) {
 	ABC.UIBase.apply(this, arguments);
@@ -21,7 +21,7 @@ var AppGenerator = module.exports = function AppGenerator(args, options, config)
 		var comboInst = flexCombo(process.cwd(), obj);
 		http.createServer(function (req, res) {
 
-			paperboy
+			jayli	
 				.deliver(that.dirName === "" ? ".":that.dirName, req, res)
 				.before(function() {
 				
