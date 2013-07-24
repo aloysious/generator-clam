@@ -1,4 +1,3 @@
-
 function ClamLogo(contex) {
 	var logo = 
 '\n'+
@@ -12,7 +11,7 @@ blue(' \\_____|______/_/    \\_\\_|  |_|\n\n');
 	logo += ('need help?')+ blue('  ===>  ') + green('yo clam:h') + '\n';
 
 	if(contex){
-		logo += '\n❯❯❯❯❯❯❯❯❯❯❯ '+green(contex.generatorName.toUpperCase())+' ❮❮❮❮❮❮❮❮❮❮❮\n';
+		logo += '\n♦♦♦♦♦♦♦♦♦♦ '+green(contex.generatorName.toUpperCase())+' ♦♦♦♦♦♦♦♦♦♦\n';
 	}
 
 	return logo;
