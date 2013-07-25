@@ -5,7 +5,7 @@ red('  _____ _               __  __ \n')+
 red(' / ____| |        /\\   |  \\/  |\n')+
 yellow('| |    | |       /  \\  | \\  / |\n')+
 green('| |    | |      / /\\ \\ | |\\/| |\n')+
-blue('| |____| |____ / ____ \\| |  | |\n')+
+purple('| |____| |____ / ____ \\| |  | |\n')+
 blue(' \\_____|______/_/    \\_\\_|  |_|\n\n');
 
 	logo += ('need help?')+ blue('  ===>  ') + green('yo clam:h') + '\n';
@@ -41,3 +41,9 @@ function red(str){
 function blue(str){
 	return consoleColor(str,34);
 }
+
+function purple(str){
+	return consoleColor(str,36);
+}
+
+// console.log(ClamLogo());
