@@ -5,15 +5,14 @@
 | |____| |____ / ____ \| |  | |
  \_____|______/_/    \_\_|  |_|
 
-你需要非常熟练使用 Grunt 并熟悉 KISSY 和 Git 
+CLAM 是淘系前端开发的轻环境和脚手架工具，你需要非常熟练使用 Grunt、KISSY 和 Git
 
-About:	
-	
-	CLAM 是淘系前端开发的轻环境和脚手架工具
-	依赖 Node、Grunt、Yeoman，配合 KISSY 和 Gitlab 部署使用
+Install:
+
+	npm install -g yo generator-clam generator-kissy-gallery
 
 Useage：
-	
+
 	yo clam		-> 	初始化一个 Project
 	yo clam:h	->	显示帮助
 	yo clam:mod	->	初始化一个模块单元
@@ -24,7 +23,7 @@ Useage：
 		combo:		http://127.0.0.1:8888/path/??a.js,b.js
 		combo:		http://127.0.0.1:8888/??path/a.js,path/b.js
 
-with Grunt：
+With Grunt：
 
 	Gruntfile.js 模板集成这些功能
 
@@ -37,7 +36,7 @@ with Grunt：
 
 创建标准KISSY组件：
 
-	yo kissy-gallery 1.0
+	yo clam:widget
 	
 CLAM 项目地址：https://github.com/jayli/generator-clam
 Grunt KMC 规则：https://github.com/daxingplay/grunt-kmc 

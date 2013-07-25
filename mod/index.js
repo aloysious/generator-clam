@@ -30,8 +30,13 @@ AppGenerator.prototype.askFor = function askFor() {
 		try {
 			abcJSON = require(path.resolve(process.cwd(),'..', 'abc.json'));
 		} catch(e){
-			abcJSON = require(path.resolve(process.cwd(),'../../', 'abc.json'));
-			modsPagesWidgets = path.basename(process.cwd());
+			try {
+				abcJSON = require(path.resolve(process.cwd(),'../../', 'abc.json'));
+				modsPagesWidgets = path.basename(process.cwd());
+			} catch(e){
+				console.log('do nothing!');
+				process.exit();
+			}
 		}
 	}
 
