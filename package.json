@@ -1,6 +1,6 @@
 {
   "name": "generator-clam",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "A Clam generator for Yeoman",
   "keywords": [
     "yeoman-generator",
@@ -28,7 +28,8 @@
     "abc-generator": "~0.0.3",
     "yeoman-generator": "~0.12.0",
 	"flex-combo":"~0.3.7",
-	"jayli-server":""
+	"jayli-server":"",
+	"generator-kissy-gallery":""
 
   },
   "devDependencies": {
