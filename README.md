@@ -5,15 +5,15 @@
 ## License
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
-## 打印帮助
-
-	yo clam:h
-
 ## clam 命令
 
 安装
 
 	npm install -g yo generator-clam generator-kissy-gallery
+
+打印帮助
+
+	yo clam:h
 
 初始化Project
 
