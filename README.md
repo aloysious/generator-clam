@@ -2,24 +2,18 @@
 
 ![](http://img04.taobaocdn.com/tps/i4/T1C5hpXwXeXXbkQf6j-210-45.jpg)
 
-[![Build Status](https://secure.travis-ci.org/jayli/generator-clam.png?branch=master)](https://travis-ci.org/jayli/generator-clam)
-
-A generator for Yeoman.
-
-## Getting started
-- Make sure you have [yo](https://github.com/yeoman/yo) installed:
-    `npm install -g yo`
-- Install the generator: `npm install -g generator-clam`
-- Run: `yo clam`
-
 ## License
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
+## 打印帮助
+
+	yo clam:h
+
 ## clam 命令
 
-安装clam
+安装
 
-	npm install -g yo generator-clam
+	npm install -g yo generator-clam generator-kissy-gallery
 
 初始化Project
 
@@ -29,23 +23,21 @@ A generator for Yeoman.
 
 	yo clam:mod
 
-启动服务
+初始化一个标准kissy组件，首先创建组件空目录
+
+	yo clam:widget
+
+生成一个标准kissy组件的版本，进入到组件跟目录
+
+	yo clam:widget x.y
+
+其中x.y是版本号
+
+启动web服务
 
 	yo clam:on
 
-## Widget 创建
-
-组件创建使用kissy-generator工具
-	
-	npm install -g generator-kissy-gallery
-
-初始化一个widget
-
-	yo kissy-gallery 1.0
-
-## 打印帮助
-
-	yo clam:h
+> 服务支持SSI
 
 ## Grunt 内嵌命令
 
