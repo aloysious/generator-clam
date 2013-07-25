@@ -5,19 +5,14 @@
 | |____| |____ / ____ \| |  | |
  \_____|______/_/    \_\_|  |_|
 
-欢迎进入 CLAM 第二季，第一季内容请阅读
+你需要非常熟练使用 Grunt 并熟悉 KISSY 和 Git 
 
-	http://gitlab.alibaba-inc.com/clam/tree/master
-	http://gitlab.alibaba-inc.com/jay.li/clam-tools/tree/master
-
-我们默认你已经非常熟练使用 Grunt 并熟悉 KISSY 和 Git 
-
-关于 CLAM:	
+About:	
 	
 	CLAM 是淘系前端开发的轻环境和脚手架工具
 	依赖 Node、Grunt、Yeoman，配合 KISSY 和 Gitlab 部署使用
 
-CLAM 命令集成：
+Useage：
 	
 	yo clam		-> 	初始化一个 Project
 	yo clam:h	->	显示帮助
@@ -29,7 +24,7 @@ CLAM 命令集成：
 		combo:		http://127.0.0.1:8888/path/??a.js,b.js
 		combo:		http://127.0.0.1:8888/??path/a.js,path/b.js
 
-项目Grunt命令集成：
+with Grunt：
 
 	Gruntfile.js 模板集成这些功能
 
@@ -39,8 +34,11 @@ CLAM 命令集成：
 	grunt newbranch	->	创建一个新版本分支
 	grunt info	->	打印当前项目的gitlab地址
 	grunt listen	->	监听项目中文件修改并实时编译
+
+创建标准KISSY组件：
+
+	yo kissy-gallery 1.0
 	
 CLAM 项目地址：https://github.com/jayli/generator-clam
 Grunt KMC 规则：https://github.com/daxingplay/grunt-kmc 
-鸣谢：https://npmjs.org/~abc-team
 
