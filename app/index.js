@@ -11,15 +11,35 @@ var ClamGenerator = module.exports = function ClamGenerator(args, options, confi
 
     this.on('end', function () {
 		var cb = this.async();
+		var that = this;
+		this.prompt([{
+				name: 'npm_install',
+				message: 'Install node_modules for grunt?(It will take 30 seconds)',
+				default: 'Y/n',
+				warning: ''
+			}], function (err, props) {
 
-		this.npmInstall('', {}, function (err) {
+				if (err) {
+					return this.emit('error', err);
+				}
 
-			if (err) {
-				return console.log('error', err);
-			}
+				this.npm_install = (/^y/i).test(props.npm_install);
+				if(this.npm_install){
+					this.npmInstall('', {}, function (err) {
 
-			console.log(green('\n\nnpm was installed successful. \n\n'));
-		});
+						if (err) {
+							return console.log('error', err);
+						}
+
+						console.log(green('\n\nnpm was installed successful. \n\n'));
+					});
+				} else {
+					console.log(yellow('\n\nplease run "npm install" before grunt\n'));
+					console.log(green('\ndone!\n'));
+				}
+			}.bind(this));
+
+		
     }.bind(this));
 };
 
