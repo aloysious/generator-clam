@@ -11,6 +11,7 @@ var ClamGenerator = module.exports = function ClamGenerator(args, options, confi
 
     this.on('end', function () {
 		var cb = this.async();
+
 		this.npmInstall('', {}, function (err) {
 
 			if (err) {
@@ -108,13 +109,25 @@ ClamGenerator.prototype.askFor = function askFor() {
 		this.srcDir = (/^y/i).test(props.srcDir);
 		this.currentBranch = 'master';
 
-		/*
-		if (this.initMojo) {
-			this.invoke('clam:mojo')
-		}
-		*/
+		if(this.srcDir){
+			this.prompt([{
+				name: 'modsPagesWidgets',
+				message: 'Create "src/mods|widgets|pages"?',
+				default: 'N/y',
+				warning: ''
+			}], function (err, props) {
 
-        cb();
+				if (err) {
+					return this.emit('error', err);
+				}
+
+				this.modsPagesWidgets = (/^y/i).test(props.modsPagesWidgets);
+				cb();
+			}.bind(this));
+		} else {
+			cb();
+		}
+
     }.bind(this));
 };
 
@@ -142,8 +155,14 @@ ClamGenerator.prototype.jshint = function jshint() {
 };
 
 ClamGenerator.prototype.app = function app() {
+	var that = this;
 	if(this.srcDir){
 		this.mkdir('src');
+		if (this.modsPagesWidgets) {
+			that.mkdir('src/pages');
+			that.mkdir('src/mods');
+			that.mkdir('src/widgets');
+		}
 	} else {
 		this.template('index.js');
 		this.template('index.css');

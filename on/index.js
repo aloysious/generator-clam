@@ -61,7 +61,7 @@ var AppGenerator = module.exports = function AppGenerator(args, options, config)
 				});
 
 
-		}).listen(this.port, '127.0.0.1');
+		}).listen(this.port);
 		console.log('Flex Combo Server running at http://127.0.0.1:'+this.port+'/');
     }.bind(this));
 
@@ -75,11 +75,15 @@ AppGenerator.prototype.askFor = function askFor() {
     // welcome message
 	console.log(ClamLogo(this));
 
-	var prompts = [{
+	var prompts = [
+		/*
+		{
 			name: 'dirName',
-			message: 'alias [dirName] to / ?', default: '',
+			message: 'alias [dirName] to / ?', 
+			default: '',
 			waring:''
 		},
+		*/
 		{
 			name: 'port',
 			message: 'server Port?',
@@ -94,7 +98,8 @@ AppGenerator.prototype.askFor = function askFor() {
             return this.emit('error', err);
         }
 
-        this.dirName = props.dirName ;
+        // this.dirName = props.dirName ;
+		this.dirName = '';
         this.port = props.port;
 
         cb();

@@ -27,7 +27,7 @@ A generator for Yeoman.
 
 初始化一个模块
 
-	yo clam:mojo
+	yo clam:mod
 
 启动服务
 

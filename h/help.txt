@@ -21,7 +21,7 @@ CLAM 命令集成：
 	
 	yo clam		-> 	初始化一个 Project
 	yo clam:h	->	显示帮助
-	yo clam:mojo	->	初始化一个模块单元
+	yo clam:mod	->	初始化一个模块单元
 	yo clam:on	->	启用 Server，使用:
 
 		浏览目录：	http://127.0.0.1:8888/path/to/dir
