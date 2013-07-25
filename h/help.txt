@@ -24,10 +24,10 @@ CLAM 命令集成：
 	yo clam:mojo	->	初始化一个模块单元
 	yo clam:on	->	启用 Server，使用:
 
-			浏览目录：	http://127.0.0.1:8888/path/to/dir
-			打开文件：	http://127.0.0.1:8888/path/to/file
-			combo:		http://127.0.0.1:8888/path/??a.js,b.js
-			combo:		http://127.0.0.1:8888/??path/a.js,path/b.js
+		浏览目录：	http://127.0.0.1:8888/path/to/dir
+		打开文件：	http://127.0.0.1:8888/path/to/file
+		combo:		http://127.0.0.1:8888/path/??a.js,b.js
+		combo:		http://127.0.0.1:8888/??path/a.js,path/b.js
 
 项目Grunt命令集成：
 
@@ -40,8 +40,7 @@ CLAM 命令集成：
 	grunt info	->	打印当前项目的gitlab地址
 	grunt listen	->	监听项目中文件修改并实时编译
 	
-
 CLAM 项目地址：https://github.com/jayli/generator-clam
-Grunt KMC规则：https://github.com/daxingplay/grunt-kmc 
+Grunt KMC 规则：https://github.com/daxingplay/grunt-kmc 
 鸣谢：https://npmjs.org/~abc-team
 
