@@ -21,11 +21,18 @@ util.inherits(AppGenerator, ABC.UIBase);
 AppGenerator.prototype.askFor = function askFor() {
 	var cb = this.async();
 	
+	var modsPagesWidgets = false;
+
 	try {
 		abcJSON = require(path.resolve(process.cwd(), 'abc.json'));
 	} catch (e) {
 		console.log('abc.json not found');
-		abcJSON = require(path.resolve(process.cwd(),'..', 'abc.json'));
+		try {
+			abcJSON = require(path.resolve(process.cwd(),'..', 'abc.json'));
+		} catch(e){
+			abcJSON = require(path.resolve(process.cwd(),'../../', 'abc.json'));
+			modsPagesWidgets = path.basename(process.cwd());
+		}
 	}
 
     if (!abcJSON.author) {
@@ -43,6 +50,7 @@ AppGenerator.prototype.askFor = function askFor() {
 		abcJSON.group = 'groupName';
 	}
 
+	this.modsPagesWidgets = modsPagesWidgets;
 	this.projectName = abcJSON.name;
 
     // welcome message
@@ -70,22 +78,25 @@ AppGenerator.prototype.askFor = function askFor() {
 
 		var _tname = props.mojoName;
 
-        this.mojoName = props.mojoName;// your-mod-name
-		this.modName = parseName(this.mojoName);//YourModName
+        this.mojoName = this.modsPagesWidgets? this.modsPagesWidgets + '/' + props.mojoName : props.mojoName;// your-mod-name
+		this.modName = parseName(_tname);//YourModName
 		this.packageName = abcJSON.name;// package-name
         this.groupName = abcJSON.group;
 		this.projectName = parseName(this.packageName); //PackageName
+		this.srcPath = this.modsPagesWidgets? '../../' : '../';
 
         cb();
     }.bind(this));
 };
 
 AppGenerator.prototype.files = function files(){
-	this.mkdir(this.mojoName);
-	this.mkdir(this.mojoName+'/img');
-    this.template('index.html',this.mojoName+'/index.html');
-    this.template('index.js',this.mojoName+'/index.js');
-    this.template('index.css',this.mojoName+'/index.css');
+	// 如果有mods/widgets/pages，就把前缀替换回来
+	var mojoName = this.modsPagesWidgets? this.mojoName.replace(/^([^\/]+)\//i,'') : this.mojoName;
+	this.mkdir(mojoName);
+	this.mkdir(mojoName+'/img');
+    this.template('index.html',mojoName + '/index.html');
+    this.template('index.js',mojoName+'/index.js');
+    this.template('index.css',mojoName+'/index.css');
 };
 
 function consoleColor(str,num){
