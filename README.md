@@ -20,11 +20,11 @@
 
 	yo clam:mod
 
-初始化一个标准kissy组件，首先创建组件空目录
+初始化一个标准kissy组件，首先创建组件空目录，进入空目录后执行：
 
 	yo clam:widget
 
-生成一个标准kissy组件的版本，进入到组件跟目录
+生成一个标准kissy组件的版本，进入到组件目录后执行：
 
 	yo clam:widget x.y
 
