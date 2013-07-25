@@ -1,6 +1,6 @@
 {
   "name": "generator-clam",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A Clam generator for Yeoman",
   "keywords": [
     "yeoman-generator",
