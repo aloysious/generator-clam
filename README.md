@@ -2,104 +2,80 @@
 
 ![](http://img04.taobaocdn.com/tps/i4/T1C5hpXwXeXXbkQf6j-210-45.jpg)
 
-## clam 命令
+环境依赖：Node、Npm
 
-安装
+## 安装 & 基本命令
+
+安装：
 
 	npm install -g yo generator-clam generator-kissy-gallery
 
-打印帮助
+命令：
 
-	yo clam:h
-
-初始化Project
-
-	yo clam
-
-初始化一个模块
-
-	yo clam:mod
-
-初始化一个标准kissy组件，首先创建组件空目录，进入空目录后执行：
-
-	yo clam:widget
-
-生成一个标准kissy组件的版本，进入到组件目录后执行：
-
-	yo clam:widget x.y
-
-其中x.y是版本号
-
-启动web服务
-
-	yo clam:on
-
-> 服务支持SSI
+- `yo clam:h`:打印帮助
+- `yo clam`:初始化Project
+- `yo clam:mod`:初始化一个模块
+- `yo clam:widget`:初始化一个标准kissy组件，首先创建组件空目录，进入空目录后执行此命令
+- `yo clam:widget x.y`:生成一个标准kissy组件的版本，进入到组件目录后执行。其中x.y是版本号
+ - `yo clam:on`:启动web服务，服务支持SSI
+ - `yo clam:build`:构建一个Page，将引用到的JS/CSS静态合并，并输出结构化好的HTML
 
 ## Grunt 内嵌命令
 
-执行构建
+初始化完成的项目包含Gruntfile.js模板，可以辅助你完成：
 
-	grunt
+- `grunt`: 执行构建
+- `grunt prepub`:执行预发
+- `grunt publish`:执行发布
+- `grunt info`:查看当前库git地址
+- `grunt newbranch`:创建新daily分支，基于当前版本累加
+- `grunt listen`:监听文件修改，实时编译
 
-执行预发
+## 再多了解一点`Generator-Clam`
 
-	grunt prepub
+### CLAM 工具族
 
-执行发布
+`Generator-Clam` 之前有两个`Clam`的工具衍生版：`Clam`和`Clam-tools`。
 
-	grunt publish
+1，[Clam](http://gitlab.alibaba-inc.com/clam/tree/master)
 
-查看当前库git地址
+Clam创建之初还没有Grunt，Clam用Grunt的思路来提供脚手架，用来应对页面结构较为固定的开发场景。
 
-	grunt info
+2，[Clam-Tools](http://gitlab.alibaba-inc.com/jay.li/clam-tools/tree/master)
 
-创建新分支
+由于Clam没实现发布、自定义构建和对KISSY的解析，Clam-Tools弥补了这几个空缺，且提供了GUI工具，实现了基于Ant的一键式构建和发布，但前提是你的项目基于SVN发布。
 
-	grunt newbranch
+3，Generator-Clam
 
-监听文件修改，实时编译
-
-	grunt listen
-
-## 再多了解一点CLAM
-
-掌握上面这些命令，你可以完成前端开发/构建/发布的全流程，但你仍需要多了解一点Clam。
-
-### Clam 对项目的定义
-
-根据适用范围，代码被分割为三层进行管理
+2013年淘系全面推广基于Gitlab的Asssets发布，Grunt和Yeoman社区渐渐成熟，Generator-Clam与时俱进，延续了Clam模块化的思想，结合Yeoman和Grunt提供了面向淘系前端环境构建脚手架工具，包含前端开发/构建/发布的全流程。Generator-Clam 对代码单元做更自由的定义，根据适用范围，任何代码单元从三个维度管理：
 
 - 项目（代码集合最大单位）
 - 模块（业务功能单元，部分业务之间可共用）
 - 组件（可全局共用）
 
-最初Clam独立出了Page，Page本身也是一个模块，统一用模块来管理。
+最初Clam独立出了Page，Page本身也是一个模块，这里统一用模块来管理。
 
-### Clam 格式的项目构建方式
+### 使用 Generator-Clam 应对这三种基本场景
 
 *创建新项目*
 
-`yo clam`会生成项目的Gruntfile.js，用来执行grunt构建，项目代码的合并、抽取、解析、压缩等操作都在Grunt中执行。所以，涉及到工具操作的场景里，*你将会有80%的时间花费在修改Gruntfile.js上*。所以，刚开始应当多花精力学通Grunt。
+`yo clam`构建新项目时会生成Gruntfile.js。之后你只需特别关注Gruntfile.js即可。
 
 *接手项目*
 
-如果你要接手一个项目，代码检出后即可进行调试，若要打包，则需要运行npm install。 
+如果你要接手一个项目，代码检出后即可进行调试；在运行`grunt`命令之前需要运行`npm install`。 
 
 *标准格式的KISSY组件*
 
-KISSY标准组件的构建使用`yo kissy-gallery x.y`，已经被映射为`yo clam:widget`，KISSY标准组件是可以直接构建为可发布到淘宝CDN的代码，并提交至`kissy gallery`中。因此，你的项目中所有widgets都应当和KISSY标准组件格式保持一致，可以：
-
-- 被build在当前项目中
-- 提交至[KISSY官方](http://gallery.kissyui.com)
+[KISSY标准组件](http://gallery.kissyui.com)的构建使用`yo kissy-gallery x.y`，已经被映射为`yo clam:widget`，KISSY标准组件是可以直接构建为可发布到淘宝CDN的代码，并提交至`kissy gallery`中。因此，你的项目中所有widgets都应当和KISSY标准组件格式保持一致，方便被其他项目使用。
 
 ### Demo的运行
 
-clam提供一个轻服务（只提供静态文件服务器、[Flex-Combo](http://npmjs.org/flex-combo) 和SSI支持），比如，启动服务后你可以这样访问
+Generator-clam 提供一个轻服务（只提供静态文件服务器、[Flex-Combo](http://npmjs.org/flex-combo) 和SSI支持），启动服务后你可以这样访问Demo：
 
 	http://localhost:8888/src/pages/detail.html?ks-debug
 
-这里的SSI兼容apache，但这个Server还是功能很弱，且不支持脚本，我们强烈建议您使用更成熟的apache+php来作为本地demo服务，Clam只作为构建工具使用。
+> 这里的SSI兼容apache，但这个Server还是功能很弱，且不支持脚本，我们强烈建议您使用更成熟的[apache+php来作为本地demo服务](http://wiki.ued.taobao.net/doku.php?id=ued.bj:f2e:tbcdn)，Clam只作为构建工具使用。
 
 ### 预发和发布
 
@@ -111,18 +87,12 @@ clam提供一个轻服务（只提供静态文件服务器、[Flex-Combo](http:/
 
 	http://g.tbcdn.cn/group-name/project-name/x.y.z/mods.js
 
-### 这个clam和陶清维护的clam有啥区别
+### Generator-Clam 的初衷和目标
 
-- 相同点：理论基础一致
-- 不同点：`yo clam` 需要配合Grunt来使用，实质是将你引路到Grunt领域；`clam`想自己成为另一个Grunt。
-
-何时选择何种方案：
-
-- generator-clam 适用于大多数项目，特别是在反复调试/测试/预发/发布的场景中，当你的项目可以比较多的抽离出组件，你又想将这些组件push到kissy gallery中，只能用他。
-- clam 适用于页面结构较为固定且页面数量不多的场景。
+Generator-Clam 初衷是面向KISSY和Gitlab用户构建一套前端开发脚手架，通过`yo clam`来将你引路到Grunt，帮助你更熟练的使用Grunt。
 
 ## TODO
 
 - include JS和CSS文件的提取合并
 - JSON接口模拟和映射
-- JS2PHP的解析
+- JS2PHP的解析（这么蛋疼的功能需要吗？）
