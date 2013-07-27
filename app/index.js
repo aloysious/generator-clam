@@ -34,7 +34,7 @@ var ClamGenerator = module.exports = function ClamGenerator(args, options, confi
 						console.log(green('\n\nnpm was installed successful. \n\n'));
 					});
 				} else {
-					console.log(yellow('\n\nplease run "npm link" before grunt\n'));
+					console.log(yellow('\n\nplease run "npm install --link" before grunt\n'));
 					console.log(green('\ndone!\n'));
 				}
 			}.bind(this));
