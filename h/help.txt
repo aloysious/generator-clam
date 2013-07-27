@@ -7,6 +7,8 @@
 
 CLAM 是淘系前端开发的轻环境和脚手架工具，你需要非常熟练使用 Grunt、KISSY 和 Git
 
+Version: v0.0.15
+
 Prepare:
 
 	npm install -g yo grunt-cli
