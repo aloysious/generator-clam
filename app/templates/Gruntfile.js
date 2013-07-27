@@ -62,7 +62,7 @@ module.exports = function (grunt) {
 						// 这里指定项目根目录下所有文件为入口文件，自定义入口请自行添加
                         expand: true,
 						cwd: './',
-                        src: [ '**/*.js', '!Gruntfile.js','!node_modules/**/*','!doc/**/*'],
+                        src: [ '**/*.js', '!build/**/*','!Gruntfile.js','!node_modules/**/*','!doc/**/*'],
                         dest: 'build/'
                     }
                 ]
@@ -495,18 +495,3 @@ module.exports = function (grunt) {
     
 };
 
-
-/*
-console.log(getBiggestVersion([
-	'1.2.3',
-	'1.2.4',
-	'1.3.4',
-	'x.y.z',
-	'1.35.2',
-	'0.30.2',
-	'2.0.1',
-	'2.10.3',
-	'2.8.2',
-	'1.3.5'
-]));
-*/

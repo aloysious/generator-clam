@@ -1,4 +1,5 @@
 function ClamLogo(contex) {
+	var version = contex? 'v'+contex.pkg.version : '';
 	var logo = 
 '\n'+
 red('  _____ _               __  __ \n')+
@@ -6,7 +7,7 @@ red(' / ____| |        /\\   |  \\/  |\n')+
 yellow('| |    | |       /  \\  | \\  / |\n')+
 green('| |    | |      / /\\ \\ | |\\/| |\n')+
 purple('| |____| |____ / ____ \\| |  | |\n')+
-blue(' \\_____|______/_/    \\_\\_|  |_|\n\n');
+blue(' \\_____|______/_/    \\_\\_|  |_|') + ' ' + version + '\n\n';
 
 	logo += ('need help?')+ purple('  ===>  ') + green('yo clam:h') + '\n';
 

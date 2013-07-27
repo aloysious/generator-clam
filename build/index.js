@@ -9,6 +9,7 @@ var AppGenerator = module.exports = function AppGenerator(args, options, config)
 	// yeoman.generators.Base.apply(this, arguments);
 	ABC.UIBase.apply(this, arguments);
 
+	console.log(yellow('TODO !'));
     this.on('end', function () {
 		console.log(yellow('TODO !'));
     }.bind(this));
