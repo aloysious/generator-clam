@@ -4,6 +4,8 @@
 
 环境依赖：Node、Npm，视频演示：[http://ascii.io/a/4384](http://ascii.io/a/4384)。
 
+![](./h/example.png)
+
 ## 安装 & 基本命令
 
 首先安装[grunt](http://gruntjs.com) 和 [yeoman](http://yeoman.io/)：
