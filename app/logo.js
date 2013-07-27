@@ -1,5 +1,9 @@
 function ClamLogo(contex) {
-	var version = contex? 'v'+contex.pkg.version : '';
+	var version = '';
+	try{
+		version = contex? 'v'+contex.pkg.version : '';
+	}
+	catch (e){}
 	var logo = 
 '\n'+
 red('  _____ _               __  __ \n')+
