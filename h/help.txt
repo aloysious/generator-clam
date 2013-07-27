@@ -7,9 +7,13 @@
 
 CLAM 是淘系前端开发的轻环境和脚手架工具，你需要非常熟练使用 Grunt、KISSY 和 Git
 
+Prepare:
+
+	npm install -g yo grunt-cli
+
 Install:
 
-	npm install -g yo generator-clam generator-kissy-gallery
+	npm install -g generator-clam generator-kissy-gallery
 
 Useage：
 
@@ -37,7 +41,9 @@ With Grunt：
 创建标准KISSY组件：
 
 	yo clam:widget
-	
-CLAM 项目地址：https://github.com/jayli/generator-clam
-Grunt KMC 规则：https://github.com/daxingplay/grunt-kmc 
 
+执行 Clam combo（合并页面js/css，生成格式化好的html）：
+	
+	yo clam:build
+	
+Clam 文档：https://github.com/jayli/generator-clam
