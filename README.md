@@ -2,7 +2,7 @@
 
 ![](http://img04.taobaocdn.com/tps/i4/T1C5hpXwXeXXbkQf6j-210-45.jpg)
 
-环境依赖：Node、Npm
+环境依赖：Node、Npm，视频演示：[http://ascii.io/a/4384](http://ascii.io/a/4384)。
 
 ## 安装 & 基本命令
 
