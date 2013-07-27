@@ -43,7 +43,7 @@
 
 1，[Clam](http://gitlab.alibaba-inc.com/clam/tree/master)
 
-Clam创建之初还没有Grunt，Clam用Grunt的思路来提供脚手架，用来应对页面结构较为固定的开发场景。
+随着页面代码结构化越来越强，前端工程师需要自己的构建工具，于是有了clam，clam包含一套完整的模块化开发思想，Clam创建之初还没有Grunt，Clam用Grunt的思路来提供脚手架，用来应对页面结构较为固定的开发场景。
 
 2，[Clam-Tools](http://gitlab.alibaba-inc.com/jay.li/clam-tools/tree/master)
 
@@ -51,7 +51,7 @@ Clam创建之初还没有Grunt，Clam用Grunt的思路来提供脚手架，用�
 
 3，[Generator-Clam](http://github.com/jayli/generator-clam)
 
-2013年淘系全面推广基于Gitlab的Asssets发布，Grunt和Yeoman社区渐渐成熟，Generator-Clam与时俱进，延续了Clam模块化的思想，结合Yeoman和Grunt提供了面向淘系前端环境构建脚手架工具，包含前端开发/构建/发布的全流程。Generator-Clam 对代码单元做更自由的定义，根据适用范围，任何代码单元从三个维度管理：
+2013年淘系全面推广基于Gitlab的Assets发布，Grunt和Yeoman社区渐渐成熟，Generator-Clam与时俱进，延续了Clam模块化的思想，结合Yeoman和Grunt提供了面向淘系前端环境构建脚手架工具，包含前端开发/构建/发布的全流程。Generator-Clam 对代码单元做更自由的定义，根据适用范围，任何代码单元从三个维度管理：
 
 - 项目（代码集合最大单位）
 - 模块（业务功能单元，部分业务之间可共用）
@@ -71,7 +71,7 @@ Generator-Clam 初衷是面向KISSY和Gitlab用户构建一套前端开发脚手
 
 2，接手项目
 
-如果你要接手一个项目，代码检出后即可进行调试；在运行`grunt`命令之前需要运行`npm install`。 
+如果你要接手一个项目，代码检出后即可进行调试；在运行`grunt`命令之前需要运行`npm install --link`。 
 
 3，标准格式的KISSY组件
 
