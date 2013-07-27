@@ -6,9 +6,13 @@
 
 ## 安装 & 基本命令
 
-安装：
+首先安装[grunt](http://gruntjs.com) 和 [yeoman](http://yeoman.io/)：
 
-	npm install -g yo generator-clam generator-kissy-gallery
+	npm install yo grunt-cli -g
+
+ 安装Generator-Clam：
+
+	npm install -g generator-clam generator-kissy-gallery
 
 命令：
 
@@ -17,8 +21,8 @@
 - `yo clam:mod`:初始化一个模块
 - `yo clam:widget`:初始化一个标准kissy组件，首先创建组件空目录，进入空目录后执行此命令
 - `yo clam:widget x.y`:生成一个标准kissy组件的版本，进入到组件目录后执行。其中x.y是版本号
- - `yo clam:on`:启动web服务，服务支持SSI
- - `yo clam:build`:构建一个Page，将引用到的JS/CSS静态合并，并输出结构化好的HTML
+- `yo clam:on`:启动web服务，服务支持SSI
+- `yo clam:build`:构建一个Page，将引用到的JS/CSS静态合并，并输出结构化好的HTML
 
 ## Grunt 内嵌命令
 
@@ -45,7 +49,7 @@ Clam创建之初还没有Grunt，Clam用Grunt的思路来提供脚手架，用�
 
 由于Clam没实现发布、自定义构建和对KISSY的解析，Clam-Tools弥补了这几个空缺，且提供了GUI工具，实现了基于Ant的一键式构建和发布，但前提是你的项目基于SVN发布。
 
-3，Generator-Clam
+3，[Generator-Clam](http://github.com/jayli/generator-clam)
 
 2013年淘系全面推广基于Gitlab的Asssets发布，Grunt和Yeoman社区渐渐成熟，Generator-Clam与时俱进，延续了Clam模块化的思想，结合Yeoman和Grunt提供了面向淘系前端环境构建脚手架工具，包含前端开发/构建/发布的全流程。Generator-Clam 对代码单元做更自由的定义，根据适用范围，任何代码单元从三个维度管理：
 
@@ -55,17 +59,21 @@ Clam创建之初还没有Grunt，Clam用Grunt的思路来提供脚手架，用�
 
 最初Clam独立出了Page，Page本身也是一个模块，这里统一用模块来管理。
 
+### Generator-Clam 的初衷和目标
+
+Generator-Clam 初衷是面向KISSY和Gitlab用户构建一套前端开发脚手架，通过`yo clam`来将你引路到Grunt，帮助你更熟练的使用Grunt。
+
 ### 使用 Generator-Clam 应对这三种基本场景
 
-*创建新项目*
+1，创建新项目
 
 `yo clam`构建新项目时会生成Gruntfile.js。之后你只需特别关注Gruntfile.js即可。
 
-*接手项目*
+2，接手项目
 
 如果你要接手一个项目，代码检出后即可进行调试；在运行`grunt`命令之前需要运行`npm install`。 
 
-*标准格式的KISSY组件*
+3，标准格式的KISSY组件
 
 [KISSY标准组件](http://gallery.kissyui.com)的构建使用`yo kissy-gallery x.y`，已经被映射为`yo clam:widget`，KISSY标准组件是可以直接构建为可发布到淘宝CDN的代码，并提交至`kissy gallery`中。因此，你的项目中所有widgets都应当和KISSY标准组件格式保持一致，方便被其他项目使用。
 
@@ -83,16 +91,14 @@ Generator-clam 提供一个轻服务（只提供静态文件服务器、[Flex-Co
 
 	http://a.tbcdn.cn/g/group-name/project-name/x.y.z/mods.js
 
-对应到`g.tbcdn.cn`的地址：
+对应到 g.tbcdn.cn 的地址：
 
 	http://g.tbcdn.cn/group-name/project-name/x.y.z/mods.js
 
-### Generator-Clam 的初衷和目标
-
-Generator-Clam 初衷是面向KISSY和Gitlab用户构建一套前端开发脚手架，通过`yo clam`来将你引路到Grunt，帮助你更熟练的使用Grunt。
 
 ## TODO
 
 - include JS和CSS文件的提取合并
 - JSON接口模拟和映射
+- 构建时图片自动上传TPS
 - JS2PHP的解析（这么蛋疼的功能需要吗？）
