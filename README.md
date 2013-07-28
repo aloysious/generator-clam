@@ -39,17 +39,21 @@
 
 ## 再多了解一点`Generator-Clam`
 
+> “会不会制造工具，是人和动物的根本区别。”——富兰克林（美）
+
 ### CLAM 工具族
 
-`Generator-Clam` 之前有两个`Clam`的工具衍生版：`Clam`和`Clam-tools`。
+`Clam`是 [陶清](http://weibo.com/u/1846621405) 对于前端模块化开的实践和落地项目，它是一个工具，旨在建立标准的模块开发流程，提高代码共享和项目构建效率，同时提供一个本地轻服务，让我们“可以坐在美丽的沙滩上写代码”。
+
+`Clam`之后有两个衍生版本，`Clam-tools`和`Generator-Clam`。
 
 1，[Clam](http://gitlab.alibaba-inc.com/clam/tree/master)
 
-随着页面代码结构化越来越强，前端工程师需要自己的构建工具，于是有了clam，clam包含一套完整的模块化开发思想，Clam创建之初还没有Grunt，Clam用Grunt的思路来提供脚手架，用来应对页面结构较为固定的开发场景。
+clam包含一套完整的模块化开发思想，用来规范结构化越来越强的前端页面，Clam创建之初还没有Grunt，Clam用Grunt的思路来提供脚手架，用来应对页面结构较为固定的开发场景。
 
 2，[Clam-Tools](http://gitlab.alibaba-inc.com/jay.li/clam-tools/tree/master)
 
-由于Clam没实现发布、自定义构建和对KISSY的解析，Clam-Tools弥补了这几个空缺，且提供了GUI工具，实现了基于Ant的一键式构建和发布，但前提是你的项目基于SVN发布。
+由于时间仓促，Clam没实现发布、自定义构建和对KISSY的解析，Clam-Tools弥补了这几个空缺，且提供了GUI工具，实现了基于Ant的一键式构建和发布，但前提是你的项目基于SVN发布。另外一个问题在于，实际上没几个前端玩的动Ant。
 
 3，[Generator-Clam](http://github.com/jayli/generator-clam)
 
