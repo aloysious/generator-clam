@@ -103,6 +103,24 @@ Generator-clam 提供一个轻服务（只提供静态文件服务器、[Flex-Co
 
 	http://g.tbcdn.cn/group-name/project-name/x.y.z/mods.js
 
+## Q & A
+
+1，'yo clam'安装node模块的时候报错？
+
+	npm ERR! Error: EACCES, mkdir '/usr/local/lib/node_modules/grunt-xx'
+
+- 原因：没有sudo
+- 解决办法：在当前目录执行`sudo npm install --link`
+
+2，tpsmate安装完了还是不能把图片自动上传CDN?
+
+- 原因：需要首先找到`node_modules`中手动执行一次
+- 解决办法：进入`node_modules/grunt-mytps/tasks/lib/tpsmate/src`，执行`python ./cli.py upload`，这时提示你输入TMS用户名和密码，完成即可
+
+3，tpsmate安装完成，但执行报错？
+
+- 原因：依赖包不完整
+- 解决办法：安装依赖`pip install -r node_modules/grunt-mytps/tasks/lib/tpsmate/src/requirements.txt`
 
 ## TODO
 
@@ -110,3 +128,5 @@ Generator-clam 提供一个轻服务（只提供静态文件服务器、[Flex-Co
 - JSON接口模拟和映射
 - 构建时图片自动上传TPS
 - JS2PHP的解析（这么蛋疼的功能需要吗？）
+
+
