@@ -79,6 +79,15 @@ module.exports = function (grunt) {
             }
 			*/
         },
+		/**
+		 * 将css文件中引用的本地图片上传CDN并替换url
+		 */
+		mytps: {
+			options: {
+				argv: "--inplace"
+			},
+			all: [ 'src/**/*.css']
+		},
 
         /**
          * 将HTML编译为KISSY 模块
@@ -287,6 +296,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-yuidoc');
+	grunt.loadNpmTasks('grunt-mytps');
 
 	// =======================  注册Grunt 各个操作 ==========================
 	
@@ -381,7 +391,7 @@ module.exports = function (grunt) {
 
 		// 构建和发布任务
 		if (!type) {
-			task.run(['clean:build', 'ktpl', 'copy', 'kmc', 'uglify', 'css_combo' ,'less','concat', 'cssmin','yuidoc'/*, 'copy', 'clean:mobile'*/]);
+			task.run(['clean:build', 'ktpl', 'mytps','copy', 'kmc', 'uglify', 'css_combo' ,'less','concat', 'cssmin','yuidoc'/*, 'copy', 'clean:mobile'*/]);
 		} else if ('publish' === type || 'pub' === type) {
 			task.run(['exec:tag', 'exec:publish']);
 		} else if ('prepub' === type) {

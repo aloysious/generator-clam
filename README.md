@@ -37,6 +37,8 @@
 - `grunt newbranch`:创建新daily分支，基于当前版本累加
 - `grunt listen`:监听文件修改，实时编译
 
+> ps:grunt构建任务依赖`grunt-mytps`子任务，该子任务（上传本地图片到CDN并替换地址）依赖python，并需要安装[tpsmate](https://github.com/sodabiscuit/tpsmate)。
+
 ## 再多了解一点`Generator-Clam`
 
 > “会不会制造工具，是人和动物的根本区别。”——富兰克林（美）

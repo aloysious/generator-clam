@@ -27,7 +27,8 @@
         "grunt-contrib-concat": "",
         "grunt-kissy-template": "~0.1.2",
         "grunt-exec": "~0.4.1",
-	"grunt-contrib-yuidoc":""
+		"grunt-contrib-yuidoc":"",
+		"grunt-mytps":""
     },
 
     "dependencies": {
