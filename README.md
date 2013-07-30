@@ -57,7 +57,7 @@ clam包含一套完整的模块化开发思想，用来规范结构化越来越�
 
 3，[Generator-Clam](http://github.com/jayli/generator-clam)
 
-2013年淘系全面推广基于Gitlab的Assets发布，Grunt和Yeoman社区渐渐成熟，Generator-Clam与时俱进，延续了Clam模块化的思想，结合Yeoman和Grunt提供了面向淘系前端环境构建脚手架工具，包含前端开发/构建/发布的全流程。Generator-Clam 对代码单元做更自由的定义，根据适用范围，任何代码单元从三个维度管理：
+2013年淘系全面推广基于Gitlab的Assets发布，Generator-Clam与时俱进，延续了Clam模块化的思想，结合Yeoman和Grunt提供了面向淘系前端环境构建脚手架工具，包含前端开发/构建/发布的全流程。Generator-Clam 对代码单元做更自由的定义，根据适用范围，任何代码单元从三个维度管理：
 
 - 项目（代码集合最大单位）
 - 模块（业务功能单元，部分业务之间可共用）
@@ -121,6 +121,11 @@ Generator-clam 提供一个轻服务（只提供静态文件服务器、[Flex-Co
 - 解决办法：安装依赖
 
 	pip install -r node_modules/grunt-mytps/tasks/lib/tpsmate/src/requirements.txt
+
+4，yo clam 构建好目录结构后安装npm包时间太长，怎么办？
+
+- 原因：构建项目最后使用`npm install --link`安装npm包，包被装到全局，映射到本地的
+- 解决办法：只有第一次执行yo clam才会耗时久一点，后续再执行yo clam就不会用这么长时间了。
 
 ## TODO
 
