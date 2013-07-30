@@ -41,8 +41,6 @@
 
 ## 再多了解一点`Generator-Clam`
 
-> “会不会制造工具，是人和动物的根本区别。”——富兰克林（美）
-
 ### CLAM 工具族
 
 `Clam`是 [陶清](http://weibo.com/u/1846621405) 对于前端模块化开的实践和落地项目，它是一个工具，旨在建立标准的模块开发流程，提高代码共享和项目构建效率，同时提供一个本地轻服务，让我们“可以坐在美丽的沙滩上写代码”。
@@ -120,13 +118,16 @@ Generator-clam 提供一个轻服务（只提供静态文件服务器、[Flex-Co
 3，tpsmate安装完成，但执行报错？
 
 - 原因：依赖包不完整
-- 解决办法：安装依赖`pip install -r node_modules/grunt-mytps/tasks/lib/tpsmate/src/requirements.txt`
+- 解决办法：安装依赖
+
+	pip install -r node_modules/grunt-mytps/tasks/lib/tpsmate/src/requirements.txt
 
 ## TODO
 
 - include JS和CSS文件的提取合并
 - JSON接口模拟和映射
-- 构建时图片自动上传TPS
+- 构建时图片自动上传TPS（Done）
 - JS2PHP的解析（这么蛋疼的功能需要吗？）
 
-
+> “会不会制造工具，是人和动物的根本区别。”——富兰克林（美）
+> 大家共勉

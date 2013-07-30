@@ -28,7 +28,7 @@ var ClamGenerator = module.exports = function ClamGenerator(args, options, confi
 					this.npmInstall('--link', {}, function (err) {
 
 						if (err) {
-							return console.log('error', err);
+							return console.log('\n'+yellow('please run "sudo npm install --link"\n'));
 						}
 
 						console.log(green('\n\nnpm was installed successful. \n\n'));
