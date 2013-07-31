@@ -90,22 +90,6 @@ module.exports = function (grunt) {
 		},
 
         /**
-         * 将HTML编译为KISSY 模块
-         * @link https://github.com/maxbbn/grunt-kissy-template
-         */
-        ktpl: {
-            main: {
-                files: [
-                    {
-                        expand: true,
-                        dest: './',
-                        src: 'mods/*-tpl.html',
-                        ext: '.js'
-                    }
-                ]
-            }
-        },
-        /**
          * CSS-Combo
 		 * combo项目中所有css，通过@import "other.css"; 来处理依赖关系
          */
@@ -129,6 +113,7 @@ module.exports = function (grunt) {
 		 * YUIDoc
 		 * 对build目录中的js文件生成文档，放入doc/中
 		 */
+		 /*
 		yuidoc: {
 			compile: {
 				name: 'generator-clam',
@@ -139,6 +124,7 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+		*/
 
         /**
          * 将LESS编译为CSS
@@ -209,10 +195,6 @@ module.exports = function (grunt) {
                 files: [ '**/*.js' ],
                 tasks: [ 'kmc', 'uglify' ]
             },
-            'tpl': {
-                files: 'mods/*-tpl.html',
-                tasks: ['ktpl']
-            },
 			'css':{
                 files: [ '**/*.css' ],
                 tasks: [ 'copy','cssmin' ]
@@ -274,17 +256,18 @@ module.exports = function (grunt) {
 					}
 				]
 			}
-		},
+		}
 
 		// 合并文件
+		/*
 		concat: {
 			dist: {
-			/*
 				src: ['from.css'],
 				dest: 'build/to.css'
-			*/
+			
 			}
 		}
+		*/
     });
 
 	// ======================= 载入使用到的通过NPM安装的模块 ==========================
@@ -295,13 +278,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-kissy-template');
+    //grunt.loadNpmTasks('grunt-kissy-template');
     grunt.loadNpmTasks('grunt-kmc');
     //grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-yuidoc');
+	//grunt.loadNpmTasks('grunt-contrib-concat');
+	//grunt.loadNpmTasks('grunt-contrib-yuidoc');
 	grunt.loadNpmTasks('grunt-mytps');
 
 	// =======================  注册Grunt 各个操作 ==========================
@@ -328,17 +311,6 @@ module.exports = function (grunt) {
 	 */
 	grunt.registerTask('listen', 'clam watch ...', function() {
 		task.run('watch');
-	});
-
-
-	/**
-	 * 启动服务
-	 */
-	grunt.registerTask('on', 'clam server...', function() {
-		initClamServer();
-	});
-	grunt.registerTask('server', 'clam server...', function() {
-		initClamServer();
 	});
 
 	/*
@@ -398,7 +370,7 @@ module.exports = function (grunt) {
 
 		// 构建和发布任务
 		if (!type) {
-			task.run(['clean:build', 'ktpl', 'mytps','copy', 'kmc', 'uglify', 'css_combo' ,'less','concat', 'cssmin','yuidoc'/*, 'copy', 'clean:mobile'*/]);
+			task.run(['clean:build', 'mytps','copy', 'kmc', 'uglify', 'css_combo' ,'less', 'cssmin'/*'concat','yuidoc', 'copy', 'clean:mobile'*/]);
 		} else if ('publish' === type || 'pub' === type) {
 			task.run(['exec:tag', 'exec:publish']);
 		} else if ('prepub' === type) {
@@ -409,12 +381,6 @@ module.exports = function (grunt) {
 	});
 
 	// =======================  辅助函数  ==========================
-
-	// 启动clam server
-	function initClamServer(){
-		console.log('sdfsdf');
-		exec('node -v');
-	}
 
 	// 遍历当前目录的文件
 	function walk(uri, files) {

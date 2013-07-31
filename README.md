@@ -24,10 +24,11 @@
 - `yo clam:widget`:初始化一个标准kissy组件，首先创建组件空目录，进入空目录后执行此命令
 - `yo clam:widget x.y`:生成一个标准kissy组件的版本，进入到组件目录后执行。其中x.y是版本号
 - `yo clam:on`:启动web服务，服务支持SSI
+- `yo clam:add <git>`:将git项目源码下载到本地，类似`svn export`
 - `yo clam:build`:(TODO)Build一个Page，将引用到的JS/CSS静态合并，并输出结构化好的HTML
-- `yo clam:page`:(TODO)生成一个Page
+- `yo clam:page`:生成一个Page
 
-各个业务线的构建命令(TODO)：
+部分子业务线的构建命令(TODO)：
 
 - `yo clam:cp` 彩票
 - `yo clam:trip` 旅行
@@ -51,6 +52,10 @@
 
 ## 再多了解一点`Generator-Clam`
 
+### Generator-Clam 的初衷和目标
+
+Generator-Clam 的目标是通过`yo clam`来将你引路到Grunt，帮助你更熟练的使用Grunt。Generator-Clam 面向阿里系前端工程师，帮助你创建标准的KISSY项目结构代码和Widgets代码。
+
 ### CLAM 工具族
 
 `Clam`是 [陶清](http://weibo.com/u/1846621405) 对于前端模块化开的实践和落地项目，它是一个工具，旨在建立标准的模块开发流程，提高代码共享和项目构建效率，同时提供一个本地轻服务，让我们“可以坐在美丽的沙滩上写代码”。
@@ -69,11 +74,11 @@ clam包含一套完整的模块化开发思想，用来规范结构化越来越�
 
 2013年淘系全面推广基于Gitlab的Assets发布，Generator-Clam与时俱进，延续了Clam模块化的思想，结合Yeoman和Grunt提供了面向淘系前端环境构建脚手架工具，包含前端开发/构建/发布的全流程。Generator-Clam 对代码单元做更自由的定义，根据适用范围，任何代码单元从三个维度管理：
 
-- 项目（代码集合最大单位）
-- 模块（业务功能单元，部分业务之间可共用）
-- 组件（可全局共用）
+- 项目（project）（代码集合最大单位）
+- 模块（module）（业务功能单元，部分业务之间可共用）
+- 组件（widget）（可全局共用）
 
-最初Clam独立出了Page，Page本身也是一个模块，这里统一用模块来管理。
+最初Clam独立出了Page，Page本身也是一个模块，这里统一用模块来管理。这里的`yo clam:page`只是生成一个引用了KISSY种子的空页面。
 
 ### 项目目录结构约定
 
@@ -112,7 +117,7 @@ clam包含一套完整的模块化开发思想，用来规范结构化越来越�
 			└── Gruntfile.js
 
 
-第二种，`src`目录中划分出`pages`/`mods`/`widgets`三个目录，这么作主要是为了兼容老的Clam项目
+第二种，`src`目录中划分出`pages`/`mods`/`widgets`三个目录，主要是为了兼容老的Clam项目
 
 第三种，代码单元和`build`目录平行，即无`src`目录：
 
@@ -148,9 +153,7 @@ clam包含一套完整的模块化开发思想，用来规范结构化越来越�
 		│   └── spec/
 		└── Gruntfile.js
 
-### Generator-Clam 的初衷和目标
-
-Generator-Clam 初衷是面向KISSY和Gitlab用户构建一套前端开发脚手架，通过`yo clam`来将你引路到Grunt，帮助你更熟练的使用Grunt。
+以上三种目录结构中，widget均和KissyGallery标准组件保持一致。
 
 ### 使用 Generator-Clam 应对这三种基本场景
 
@@ -219,4 +222,5 @@ Generator-clam 提供一个轻服务（只提供静态文件服务器、[Flex-Co
 - 各条业务线的固定构建脚本
 
 > “会不会制造工具，是人和动物的根本区别。”——富兰克林（美）
-> 大家共勉
+> 
+> 共勉
