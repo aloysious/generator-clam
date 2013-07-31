@@ -307,16 +307,6 @@ module.exports = function (grunt) {
 		task.run('watch');
 	});
 
-	/**
-	 * 启动服务
-	 */
-	grunt.registerTask('on', 'clam server...', function() {
-		initClamServer();
-	});
-	grunt.registerTask('server', 'clam server...', function() {
-		initClamServer();
-	});
-
 	/*
 	 * 获取当前库的信息
 	 **/
@@ -385,12 +375,6 @@ module.exports = function (grunt) {
 	});
 
 	// =======================  辅助函数  ==========================
-
-	// 启动clam server
-	function initClamServer(){
-		console.log('sdfsdf');
-		exec('node -v');
-	}
 
 	// 遍历当前目录的文件
 	function walk(uri, files) {
