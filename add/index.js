@@ -6,6 +6,7 @@ var yeoman = require('yeoman-generator');
 var ABC = require('abc-generator');
 var exec = require('child_process').exec;
 var	fs = require('fs');
+var	rmdir = require('./rmdir');
 
 var AppGenerator = module.exports = function AppGenerator(args, options, config) {
 	// yeoman.generators.Base.apply(this, arguments);
@@ -14,13 +15,23 @@ var AppGenerator = module.exports = function AppGenerator(args, options, config)
 	this.args = args;
 
     this.on('end', function () {
-		console.log(this.gitpath);
+		console.log('downloading ' + yellow(this.gitpath) + '...\n');
 		if(isGitPath(this.gitpath)){
 			exec('git clone ' + this.gitpath);
-			// TODO 删除不好使
-			fs.unlinkSync(path.resolve(process.cwd(),getGitName(this.gitpath),'.git'));
-			console.log(path.resolve(process.cwd(),getGitName(this.gitpath),'.git'));
-			console.log(green('done!'));
+			
+			exec('rm -rf ' + path.resolve(process.cwd(),getGitName(this.gitpath),'.git'),function (error, stdout, stderr) {
+				if (error !== null) {
+				  console.log(red('exec error: ' + error));
+				}
+				console.log(green('done!'));
+			});
+			// 这种写法为啥不好使？TODO
+			/*
+			rmdir(path.resolve(process.cwd(),getGitName(this.gitpath),'.git'),function ( err, dirs, files ){
+				//console.log(path.resolve(process.cwd(),getGitName(this.gitpath),'.git'));
+				console.log(green('done!'));
+			});		
+			*/
 		} else {
 			console.log(yellow('git path is not correct!!'));
 		}
