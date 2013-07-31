@@ -213,6 +213,19 @@ Generator-clam 提供一个轻服务（只提供静态文件服务器、[Flex-Co
 - 原因：构建项目最后使用`npm install --link`安装npm包，包被装到全局，映射到本地的
 - 解决办法：只有第一次执行yo clam才会耗时久一点，后续再执行yo clam就不会用这么长时间了。
 
+5，yo clam:mod 构建好一个模块后，怎么运行它？
+
+直接访问生成好的html文件，`xx/index.html?ks-debug`，会有弹框"ok"。
+
+6，生成的默认Gruntfile.js只根据入口文件合并JS，我如何生成依赖关系表mods.js ？
+
+修改Gruntfile.js，参照注释修改kmc任务。有一点需要注意，如果要生成依赖关系表，你的JS源文件必须带有模块名定义，比如：
+
+	// 模块名不能省略
+	KISSY.add('grp/header/index',function(S){
+		// your code
+	});
+
 ## TODO
 
 - include JS和CSS文件的提取合并
