@@ -7,29 +7,21 @@
 
 CLAM 是淘系前端开发的轻环境和脚手架工具，你需要非常熟练使用 Grunt、KISSY 和 Git
 
-Prepare:
-
-	npm install -g yo grunt-cli
-
-Install:
-
-	npm install -g generator-clam generator-kissy-gallery
-
 Useage：
 
 	yo clam		-> 	初始化一个 Project
 	yo clam:h	->	显示帮助
 	yo clam:mod	->	初始化一个模块单元
-	yo clam:on	->	启用 Server，使用:
+	yo clam:page->	生成一个引用KISSY种子的空页面
+	yo clam:add <git> ->	将git项目download到本地，类似svn export
+	yo clam:on	->	启用 Server，使用方法:
 
 		浏览目录：	http://127.0.0.1:8888/path/to/dir
 		打开文件：	http://127.0.0.1:8888/path/to/file
 		combo:		http://127.0.0.1:8888/path/??a.js,b.js
 		combo:		http://127.0.0.1:8888/??path/a.js,path/b.js
 
-With Grunt：
-
-	Gruntfile.js 模板集成这些功能
+Grunt命令：
 
 	grunt 		-> 	在daily分支中构建项目
 	grunt prepub	->	预发
@@ -37,6 +29,15 @@ With Grunt：
 	grunt newbranch	->	创建一个新版本分支
 	grunt info	->	打印当前项目的gitlab地址
 	grunt listen	->	监听项目中文件修改并实时编译
+
+业务相关命令：
+
+	yo clam:cp		彩票
+	yo clam:trip	旅行
+	yo clam:cph5	彩票h5
+	yo clam:triph5	旅行h5
+	yo clam:wt		网厅
+	yo clam:tcc		充值
 
 创建标准KISSY组件：
 
