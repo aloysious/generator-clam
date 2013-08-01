@@ -24,7 +24,8 @@
 - `yo clam:widget`:初始化一个标准kissy组件，首先创建组件空目录，进入空目录后执行此命令
 - `yo clam:widget x.y`:生成一个标准kissy组件的版本，进入到组件目录后执行。其中x.y是版本号
 - `yo clam:on`:启动web服务，服务支持SSI
-- `yo clam:add <git>`:将git项目源码下载到本地，类似`svn export`
+- `yo clam:install <git>`:(TODO)git可以是git地址，也可以是Gallery模块名称，都将对应的git项目源码下载到本地，类似`svn export`
+- `yo clam:search <name>`:(TODO)在Gallery中查找现有的匹配的模块名称
 - `yo clam:build`:(TODO)Build一个Page，将引用到的JS/CSS静态合并，并输出结构化好的HTML
 - `yo clam:page`:生成一个Page
 
