@@ -88,7 +88,7 @@ ClamGenerator.prototype.askFor = function askFor() {
         {
             name: 'srcDir',
             message: 'create "src" directory?',
-            default: 'N/y',
+            default: 'Y/n',
             warning: ''
         },
         {
@@ -108,7 +108,13 @@ ClamGenerator.prototype.askFor = function askFor() {
             message: 'Group Name:',
             default: 'group-name',
             warning: ''
-        }
+        },
+		{
+            name: 'version',
+            message: 'Version:',
+            default: 'x.y.z',
+            warning: ''
+		}
 	];
 
 	/*
@@ -125,8 +131,11 @@ ClamGenerator.prototype.askFor = function askFor() {
 		this.projectName = parseMojoName(this.packageName); //ProjectName
         this.author = props.author;
         this.email = props.email;
+        this.version = props.version;
         this.groupName = props.groupName;
+		this.config = 'http://g.tbcdn.cn/'+this.groupName+'/'+this.packageName+'/'+this.version+'/config.js';
 		this.srcDir = (/^y/i).test(props.srcDir);
+		this.srcPath = '../';
 		this.currentBranch = 'master';
 
 		if(this.srcDir){
@@ -142,6 +151,9 @@ ClamGenerator.prototype.askFor = function askFor() {
 				}
 
 				this.modsPagesWidgets = (/^y/i).test(props.modsPagesWidgets);
+				if(this.modsPagesWidgets){
+					this.srcPath = '../../';
+				}
 				cb();
 			}.bind(this));
 		} else {
@@ -149,9 +161,6 @@ ClamGenerator.prototype.askFor = function askFor() {
 		}
 
     }.bind(this));
-};
-
-ClamGenerator.prototype.app = function app() {
 };
 
 ClamGenerator.prototype.gruntfile = function gruntfile() {
@@ -170,10 +179,6 @@ ClamGenerator.prototype.git = function git() {
     this.copy('_gitignore', '.gitignore');
 };
 
-ClamGenerator.prototype.jshint = function jshint() {
-    // this.copy('jshintrc', '.jshintrc');
-};
-
 ClamGenerator.prototype.app = function app() {
 	var that = this;
 	if(this.srcDir){
@@ -183,6 +188,7 @@ ClamGenerator.prototype.app = function app() {
 			that.mkdir('src/mods');
 			that.mkdir('src/widgets');
 		}
+		this.template('config.js','src/config.js');
 	} else {
 		this.template('index.js');
 		this.template('index.css');
@@ -192,9 +198,6 @@ ClamGenerator.prototype.app = function app() {
 	this.mkdir('doc');
 	this.mkdir('build');
 	this.template('abc.json');
-};
-
-ClamGenerator.prototype.install = function(){
 };
 
 function consoleColor(str,num){
