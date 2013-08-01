@@ -12,8 +12,8 @@ Useage：
 	yo clam		-> 	初始化一个 Project
 	yo clam:h	->	显示帮助
 	yo clam:mod	->	初始化一个模块单元
-	yo clam:page->	生成一个引用KISSY种子的空页面
-	yo clam:add <git> ->	将git项目download到本地，类似svn export
+	yo clam:page	->	生成一个引用KISSY种子的空页面
+	yo clam:add <git>	 ->	将git项目download到本地，类似svn export
 	yo clam:on	->	启用 Server，使用方法:
 
 		浏览目录：	http://127.0.0.1:8888/path/to/dir

@@ -210,8 +210,8 @@ Generator-clam 提供一个轻服务（只提供静态文件服务器、[Flex-Co
 
 4，yo clam 构建好目录结构后安装npm包时间太长，怎么办？
 
-- 原因：构建项目最后使用`npm install --link`安装npm包，包被装到全局，映射到本地的
-- 解决办法：只有第一次执行yo clam才会耗时久一点，后续再执行yo clam就不会用这么长时间了。
+- 原因：构建项目最后使用`npm install`安装npm包
+- 解决办法：在首次构建项目的时候最后一步询问是否安装本地`node_modules`，输入`N`，在当前目录使用`npm install --link`，将包安装到全局。以后每次`yo clam`最后都不安装本地包，使用`npm install --link`来安装，速度会很快。
 
 5，yo clam:mod 构建好一个模块后，怎么运行它？
 

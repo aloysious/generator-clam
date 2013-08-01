@@ -25,16 +25,16 @@ var ClamGenerator = module.exports = function ClamGenerator(args, options, confi
 
 				this.npm_install = (/^y/i).test(props.npm_install);
 				if(this.npm_install){
-					this.npmInstall('--link', {}, function (err) {
+					this.npmInstall('', {}, function (err) {
 
 						if (err) {
-							return console.log('\n'+yellow('please run "sudo npm install --link"\n'));
+							return console.log('\n'+yellow('please run "sudo npm install"\n'));
 						}
 
 						console.log(green('\n\nnpm was installed successful. \n\n'));
 					});
 				} else {
-					console.log(yellow('\n\nplease run "npm install --link" before grunt\n'));
+					console.log(yellow('\n\nplease run "npm install" before grunt\n'));
 					console.log(green('\ndone!\n'));
 				}
 			}.bind(this));
