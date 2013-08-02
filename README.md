@@ -23,7 +23,7 @@
 - `yo clam:mod`:初始化一个模块
 - `yo clam:widget`:初始化一个标准kissy组件，首先创建组件空目录，进入空目录后执行此命令
 - `yo clam:widget x.y`:生成一个标准kissy组件的版本，进入到组件目录后执行。其中x.y是版本号
-- `yo clam:on`:启动web服务，服务支持SSI
+- `yo clam:on`:启动web服务，服务支持SSI，推荐使用`grunt server`
 - `yo clam:install <git>`:(TODO)git可以是git地址，也可以是Gallery模块名称，都将对应的git项目源码下载到本地，类似`svn export`
 - `yo clam:search <name>`:(TODO)在Gallery中查找现有的匹配的模块名称
 - `yo clam:build`:(TODO)Build一个Page，将引用到的JS/CSS静态合并，并输出结构化好的HTML
@@ -48,14 +48,19 @@
 - `grunt info`:查看当前库git地址
 - `grunt newbranch`:创建新daily分支，基于当前版本累加
 - `grunt listen`:监听文件修改，实时编译
+- `grunt server`:开启本地调试模式
 
 > ps:grunt构建任务依赖`grunt-mytps`子任务，该子任务（上传本地图片到CDN并替换地址）依赖python，并需要安装[tpsmate](https://github.com/sodabiscuit/tpsmate)。
 
 ## 再多了解一点`Generator-Clam`
 
-### Generator-Clam 的初衷和目标
+### Generator-Clam 的初衷和愿景
 
-Generator-Clam 的目标是通过`yo clam`来将你引路到Grunt，帮助你更熟练的使用Grunt。Generator-Clam 面向阿里系前端工程师，帮助你创建标准的KISSY项目结构代码和Widgets代码。
+Generator-Clam 的目标是通过`yo clam`来将你引路到Grunt，帮助你更熟练的使用Grunt。
+
+Generator-Clam 面向阿里系前端工程师，帮助你创建标准的KISSY项目结构代码和Widgets代码。
+
+愿景：打造一款无负担的前端开发脚手架工具，打破产品间的代码共享壁垒。
 
 ### CLAM 工具族
 
@@ -226,6 +231,16 @@ Generator-clam 提供一个轻服务（只提供静态文件服务器、[Flex-Co
 	KISSY.add('grp/header/index',function(S){
 		// your code
 	});
+
+7，`grunt server`启动报错`Error: listen EACCES。`
+
+在Mac/Linux下需要root权限才能启用80端口，加上sudo
+	
+	sudo grunt server
+
+8，`grunt server`为什么会提示Error: listen EADDRINUSE。
+
+Flex Combo所需要使用的端口正在被使用中，如果这个端口是80端口，你需要检查系统中是否有其他web容器，比如Apache、Nginx等是否使用了80端口。如果不是，你需要检查是否系统中有其他Flex Combo正在运行。
 
 ## TODO
 
