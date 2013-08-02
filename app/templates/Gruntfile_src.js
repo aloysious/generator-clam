@@ -69,7 +69,7 @@ module.exports = function (grunt) {
             }
 			// 若有新任务，请自行添加
 			/*
-            simple-example: {
+            "simple-example": {
                 files: [
                     {
                         src: "a.js",
@@ -86,7 +86,7 @@ module.exports = function (grunt) {
 			options: {
 				argv: "--inplace"
 			},
-			all: [ 'src/**/*.css']
+			all: [ 'build/**/*.css']
 		},
 
         /**
@@ -110,6 +110,20 @@ module.exports = function (grunt) {
                 ]
             }
         },
+		/**
+		 * FlexCombo服务配置
+		 */
+		flexcombo:{
+			options: {
+				target:'src',
+				urls:'/<%= pkg.group %>/<%= pkg.name %>',
+				port:'80',
+				servlet:'?',
+				separator:',',
+				charset:'utf8'
+			},
+			main:{}
+		},
 		/**
 		 * YUIDoc
 		 * 对build目录中的js文件生成文档，放入doc/中
@@ -243,7 +257,7 @@ module.exports = function (grunt) {
 					{
 						// src: files.js, 
 						expand:true,
-						src: ['**/*.js','**/*.css'], 
+						src: ['**/*.js','**/*.css','**/*.png','**/*.gif','**/*.jpg','!node_modules'], 
 						dest: 'build/', 
 						cwd:'src/',
 						filter: 'isFile'
@@ -272,14 +286,16 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    //grunt.loadNpmTasks('grunt-kissy-template');
     grunt.loadNpmTasks('grunt-kmc');
-    //grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-mytps');
+	grunt.loadNpmTasks('grunt-flexcombo');
+
+    //grunt.loadNpmTasks('grunt-kissy-template');
+    //grunt.loadNpmTasks('grunt-contrib-connect');
 	//grunt.loadNpmTasks('grunt-contrib-concat');
 	//grunt.loadNpmTasks('grunt-contrib-yuidoc');
-	grunt.loadNpmTasks('grunt-mytps');
 
 	// =======================  注册Grunt 各个操作 ==========================
 	
@@ -305,6 +321,13 @@ module.exports = function (grunt) {
 	 */
 	grunt.registerTask('listen', 'clam watch ...', function() {
 		task.run('watch');
+	});
+
+	/**
+	 * 监听修改 
+	 */
+	grunt.registerTask('server', 'clam server...', function() {
+		task.run(['flexcombo','watch']);
 	});
 
 	/*
@@ -364,7 +387,7 @@ module.exports = function (grunt) {
 
 		// 构建和发布任务
 		if (!type) {
-			task.run(['clean:build', 'mytps','copy', 'kmc', 'uglify', 'css_combo' ,'less',, 'cssmin'/*'concat','yuidoc', 'copy', 'clean:mobile'*/]);
+			task.run(['clean:build', 'copy', 'mytps','kmc', 'uglify', 'css_combo' ,'less',, 'cssmin'/*'concat','yuidoc', 'copy', 'clean:mobile'*/]);
 		} else if ('publish' === type || 'pub' === type) {
 			task.run(['exec:tag', 'exec:publish']);
 		} else if ('prepub' === type) {
@@ -461,6 +484,4 @@ module.exports = function (grunt) {
 		}
 		return r;
 	}
-
-    
 };
