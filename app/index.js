@@ -200,6 +200,7 @@ ClamGenerator.prototype.app = function app() {
 		this.template('index.js');
 		this.template('index.css');
 		this.template('index.html');
+		this.template('config.js');
 	}
 	this.copy('README.md', 'README.md');
 	this.mkdir('doc');
