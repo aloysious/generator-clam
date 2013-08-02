@@ -39,7 +39,7 @@ module.exports = function (grunt) {
 		 *
          * 		@link https://github.com/daxingplay/grunt-kmc
 		 *
-		 * 如果需要只生成依赖关系表，不做合并，源文件必须指定名称，比如
+		 * 如果需要只生成依赖关系表，不做合并，JS源文件必须指定模块名称，比如
 		 *		KISSY.add('group/project/file',function(S){});
 		 * 并在kmc.options中增加两个参数:
 		 *		depFilePath: 'build/mods.js',
@@ -70,7 +70,7 @@ module.exports = function (grunt) {
             }
 			// 若有新任务，请自行添加
 			/*
-            simple-example: {
+            "simple-example": {
                 files: [
                     {
                         src: "a.js",

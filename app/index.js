@@ -197,9 +197,11 @@ ClamGenerator.prototype.app = function app() {
 		}
 		this.template('config.js','src/config.js');
 	} else {
+		/*
 		this.template('index.js');
 		this.template('index.css');
 		this.template('index.html');
+		*/
 		this.template('config.js');
 	}
 	this.copy('README.md', 'README.md');
