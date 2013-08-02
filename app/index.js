@@ -109,10 +109,16 @@ ClamGenerator.prototype.askFor = function askFor() {
             default: 'group-name',
             warning: ''
         },
+        {
+            name: 'port',
+            message: 'HTTP Serve Port:',
+            default: '80',
+            warning: ''
+        },
 		{
             name: 'version',
             message: 'Version:',
-            default: 'x.y.z',
+            default: '0.0.1',
             warning: ''
 		}
 	];
@@ -131,6 +137,7 @@ ClamGenerator.prototype.askFor = function askFor() {
 		this.projectName = parseMojoName(this.packageName); //ProjectName
         this.author = props.author;
         this.email = props.email;
+		this.port = props.port;
         this.version = props.version;
         this.groupName = props.groupName;
 		this.config = 'http://g.tbcdn.cn/'+this.groupName+'/'+this.packageName+'/'+this.version+'/config.js';
@@ -141,7 +148,7 @@ ClamGenerator.prototype.askFor = function askFor() {
 		if(this.srcDir){
 			this.prompt([{
 				name: 'modsPagesWidgets',
-				message: 'Create "src/mods|widgets|pages"?',
+				message: 'Create "src/mods[widgets|pages]"?',
 				default: 'N/y',
 				warning: ''
 			}], function (err, props) {

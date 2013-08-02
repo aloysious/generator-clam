@@ -117,7 +117,7 @@ module.exports = function (grunt) {
 			options: {
 				target:'src',
 				urls:'/<%= pkg.group %>/<%= pkg.name %>',
-				port:'80',
+				port:'<%= pkg.port %>',
 				servlet:'?',
 				separator:',',
 				charset:'utf8'
@@ -324,7 +324,7 @@ module.exports = function (grunt) {
 	});
 
 	/**
-	 * 监听修改 
+	 * 启动服务
 	 */
 	grunt.registerTask('server', 'clam server...', function() {
 		task.run(['flexcombo','watch']);

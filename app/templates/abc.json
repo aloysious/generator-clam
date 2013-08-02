@@ -2,6 +2,7 @@
     "name": "<%= packageName %>",
     "desc": "description of your app",
     "type": "clam",
+	"port":"<%= port %>",
 	"group":"<%= groupName %>",
 	"src":"<%= srcDir %>",
 	"version":"<%= version %>",

@@ -12,6 +12,7 @@ module.exports = function (grunt) {
 	// files.js 存储项目中的所有js文件
 	// file.css 存储项目中的所有css文件
 	// file.less 存储项目中所有less文件
+	// file.pic 存储项目中所有图片文件
 
 	// ======================= 配置每个任务 ==========================
 	
@@ -109,6 +110,20 @@ module.exports = function (grunt) {
                 ]
             }
         },
+		/**
+		 * FlexCombo服务配置
+		 */
+		flexcombo:{
+			options: {
+				target:'',
+				urls:'/<%= pkg.group %>/<%= pkg.name %>',
+				port:'<%= pkg.port %>',
+				servlet:'?',
+				separator:',',
+				charset:'utf8'
+			},
+			main:{}
+		},
 		/**
 		 * YUIDoc
 		 * 对build目录中的js文件生成文档，放入doc/中
@@ -240,6 +255,11 @@ module.exports = function (grunt) {
 			main: {
 				files:[
 					{
+						src: files.pic, 
+						dest: 'build/', 
+						filter: 'isFile'
+					},
+					{
 						src: files.js, 
 						dest: 'build/', 
 						filter: 'isFile'
@@ -278,14 +298,16 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    //grunt.loadNpmTasks('grunt-kissy-template');
     grunt.loadNpmTasks('grunt-kmc');
-    //grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-mytps');
+	grunt.loadNpmTasks('grunt-flexcombo');
+
+    //grunt.loadNpmTasks('grunt-kissy-template');
+    //grunt.loadNpmTasks('grunt-contrib-connect');
 	//grunt.loadNpmTasks('grunt-contrib-concat');
 	//grunt.loadNpmTasks('grunt-contrib-yuidoc');
-	grunt.loadNpmTasks('grunt-mytps');
 
 	// =======================  注册Grunt 各个操作 ==========================
 	
@@ -311,6 +333,13 @@ module.exports = function (grunt) {
 	 */
 	grunt.registerTask('listen', 'clam watch ...', function() {
 		task.run('watch');
+	});
+
+	/**
+	 * 启动服务
+	 */
+	grunt.registerTask('server', 'clam server...', function() {
+		task.run(['flexcombo','watch']);
 	});
 
 	/*
@@ -370,7 +399,7 @@ module.exports = function (grunt) {
 
 		// 构建和发布任务
 		if (!type) {
-			task.run(['clean:build', 'mytps','copy', 'kmc', 'uglify', 'css_combo' ,'less', 'cssmin'/*'concat','yuidoc', 'copy', 'clean:mobile'*/]);
+			task.run(['clean:build', 'copy', 'mytps','kmc', 'uglify', 'css_combo' ,'less',, 'cssmin'/*'concat','yuidoc', 'copy', 'clean:mobile'*/]);
 		} else if ('publish' === type || 'pub' === type) {
 			task.run(['exec:tag', 'exec:publish']);
 		} else if ('prepub' === type) {
@@ -400,6 +429,15 @@ module.exports = function (grunt) {
 				break;
 			case '.scss':
 				files.scss.push(uri);
+				break;
+			case '.png':
+				files.pic.push(uri);
+				break;
+			case '.gif':
+				files.pic.push(uri);
+				break;
+			case '.jpg':
+				files.pic.push(uri);
 				break;
 			default:
 				files.other.push(uri);
