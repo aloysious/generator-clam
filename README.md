@@ -195,7 +195,7 @@ Generator-clam 提供一个轻服务（只提供静态文件服务器、[Flex-Co
 	npm ERR! Error: EACCES, mkdir '/usr/local/lib/node_modules/grunt-xx'
 
 - 原因：没有sudo
-- 解决办法：在当前目录执行`sudo npm install --link`
+- 解决办法：在当前目录执行`sudo npm install`
 
 2，tpsmate安装完了还是不能把图片自动上传CDN?
 
@@ -232,7 +232,5 @@ Generator-clam 提供一个轻服务（只提供静态文件服务器、[Flex-Co
 - include JS和CSS文件的提取合并
 - JSON接口模拟和映射
 - 各条业务线的固定构建脚本
+- `yo clam:install`/`yo clam:list`，安装和查找Gallery模块
 
-> “会不会制造工具，是人和动物的根本区别。”——富兰克林（美）
-> 
-> 共勉
